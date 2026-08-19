@@ -232,6 +232,7 @@
     function refresh() { disp.innerHTML = (esc(numBuf) || '<span class="caret">​</span>'); }
     function press(k) {
       VF.AUDIO.click(VF.save);
+      try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
       if (k === 'del') numBuf = numBuf.slice(0, -1);
       else if (k === 'go') { submitNum(); return; }
       else if (numBuf.length < 12) {

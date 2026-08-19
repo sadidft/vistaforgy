@@ -205,10 +205,19 @@
         var hit = !q || (n.name || '').toLowerCase().indexOf(q) >= 0 || (n.domain || '').indexOf(q) >= 0 || (n.id || '').indexOf(q) >= 0;
         b.style.display = hit ? '' : 'none';
       });
+      var total = 0;
       UI.$$('.dom-group').forEach(function (dg) {
         var any = UI.$$('.node-chip', dg).some(function (c) { return c.style.display !== 'none'; });
         dg.style.display = any ? '' : 'none';
+        if (any) total++;
       });
+      var sec = UI.$('.screen');
+      var msg = UI.$('#mapEmpty');
+      if (total === 0 && !msg && sec) {
+        msg = UI.el('div', 'map-empty', 'Tidak ada skill yang cocok dengan "' + UI.esc(q) + '" — coba kata lain (mis. turunan, antrean, LP).');
+        msg.id = 'mapEmpty';
+        sec.appendChild(msg);
+      } else if (msg && total > 0) msg.remove();
     });
   });
 
@@ -319,7 +328,7 @@
       var jam = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
       var tgl = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
       html += '<div class="kv"><span>' + tgl + ' ' + jam + ' · ' + ({ daily: 'Harian', quick: 'Quick', zeno: 'Zeno', exam: 'Ujian', boss: 'Boss', sim: 'Sim' }[s2.mode] || s2.mode) + '</span>' +
-        '<b>' + s2.correct + '/' + s2.answered + ' · ' + Math.round(s2.ms / 60000) + ' mnt <button class="mini-btn sess-det" data-i="' + i + '">detail</button></b></div>';
+        '<span class="kv-r"><b>' + s2.correct + '/' + s2.answered + ' · ' + Math.round(s2.ms / 60000) + ' mnt</b><button class="mini-btn sess-det" data-i="' + i + '">detail</button></span></div>';
     });
     html += '</div>';
     var hours = {};
@@ -587,7 +596,7 @@
       UI.nav('home');
     };
     UI.$('#obCalib').onclick = function () {
-      var CAL_NODES = ['ari.campur', 'ari.persen', 'log.implikasi', 'dat.mean', 'ari.rasio', 'alj.linear1'];
+      var CAL_NODES = ['ari.campur', 'ari.pecahan', 'log.negasi', 'log.implikasi', 'log.deduksi', 'dat.banding']; // semua family MC
       var ci = 0, right = 0;
       var box = UI.$('#calibBox');
       function nextCal() {
@@ -597,7 +606,14 @@
           return;
         }
         var nid = CAL_NODES[ci];
-        var q = VF.ENGINE.make(nid, 1200);
+        var q = null;
+        try { q = VF.ENGINE.make(nid, 1200); } catch (e) { q = null; }
+        if (!q || q.format !== 'mc' || !q.choices) {
+          // jangan pernah macet: skip node bermasalah, lanjut berikutnya
+          ci++;
+          nextCal();
+          return;
+        }
         var idxs = q.choices.map(function (c, i) { return i; });
         for (var i = idxs.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idxs[i]; idxs[i] = idxs[j]; idxs[j] = t; }
         box.innerHTML = '<div class="qcard" style="margin-top:10px"><div class="q-meta">Kalibrasi ' + (ci + 1) + '/' + CAL_NODES.length + '</div>' +

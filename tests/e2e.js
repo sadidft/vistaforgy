@@ -138,6 +138,54 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
   ok(true, 'modal detail node + kartu konsep render OK');
   await page.keyboard.press('Escape');
 
+  // 6ab. KALIBRASI (bugfix v1.6): soal harus MAJU setelah dijawab
+  {
+    const p2 = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    p2.on('pageerror', e2 => errors.push('calib: ' + e2.message));
+    await p2.goto(APP);
+    await p2.waitForSelector('#obCalib', { timeout: 6000 });
+    await p2.click('#obCalib');
+    await p2.waitForSelector('.calib-opt', { timeout: 5000 });
+    const meta1 = await p2.textContent('.q-meta');
+    await (await p2.$('.calib-opt')).click();
+    await p2.waitForFunction(() => /2\/6/.test((document.querySelector('.q-meta') || {}).textContent || ''), { timeout: 4000 }).catch(() => {});
+    const meta2 = await p2.textContent('.q-meta');
+    ok(/1\/6/.test(meta1) && /2\/6/.test(meta2), 'kalibrasi maju: "' + meta1.trim() + '" → "' + meta2.trim() + '"');
+    await p2.close();
+  }
+
+  // 6ab2. GAP antar panel di Setelan/Data (bugfix v1.6: "nempel dempetan")
+  {
+    await page.goto(APP + '#/settings');
+    await page.waitForSelector('#btnReset', { timeout: 4000 });
+    const gap = await page.evaluate(() => {
+      const panels = document.querySelectorAll('.screen > .panel');
+      if (panels.length < 2) return -1;
+      const a = panels[0].getBoundingClientRect(), b = panels[1].getBoundingClientRect();
+      return Math.round(b.top - a.bottom);
+    });
+    ok(gap >= 8, 'panel Setelan berjarak ' + gap + 'px (dulu 0)');
+    await page.goto(APP + '#/data');
+    await page.waitForSelector('#btnExport', { timeout: 4000 });
+    const gap2 = await page.evaluate(() => {
+      const panels = document.querySelectorAll('.screen > .panel');
+      const a = panels[0].getBoundingClientRect(), b = panels[1].getBoundingClientRect();
+      return Math.round(b.top - a.bottom);
+    });
+    ok(gap2 >= 8, 'panel Data berjarak ' + gap2 + 'px');
+    // tombol tutup modal ada
+    await page.click('#btnPlainExp'); // buat toast, bukan modal — cek modal via glosarium
+    await page.goto(APP + '#/settings');
+    await page.waitForSelector('#btnGlossary', { timeout: 4000 });
+    await page.click('#btnGlossary');
+    await page.waitForSelector('.modal-x', { timeout: 3000 });
+    ok(true, 'modal punya tombol tutup ✕');
+    await page.click('.modal-x');
+    await page.waitForTimeout(400);
+    const gone = await page.$('.modal-ov');
+    ok(!gone, '✕ menutup modal');
+  }
+
   // 6b. Dropdown custom Setelan (v1.5.2): ganti tema → data-theme berubah
   await page.goto(APP + '#/settings');
   await page.waitForSelector('#ddTheme .dd-btn', { timeout: 4000 });

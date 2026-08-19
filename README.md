@@ -1,7 +1,9 @@
-# 🔩 Vista Forgy — Gym Otak (v1.5 — logo VA + Topologi 3D)
+# 🔩 Vista Forgy — Gym Otak (v1.6)
 
 > **Gym untuk otakmu — logika & matematika industri sampai di luar kepala.**
 >
+> 🆕 **v1.6 — Front-end sweep**: FIX kalibrasi macet di soal 1/6 (node numeric kini diganti node MC + guard anti-macet), FIX gap panel Setelan/Data (dulu nempel 0px → 14px), jarak onboarding dirapikan, modal punya tombol ✕, transisi halaman halus, legend heatmap, focus-ring mint konsisten, scrollbar gelap, haptic keypad, runner header tahan layar 320px, toggle-row responsif, pesan "tidak ketemu" di pencarian Peta. QA: E2E 25/25 (5 regression test baru) + Visual 32/32.
+> 🆕 **v1.5.1–v1.5.3**: Gauss 3×3 full (steps), Cramer (steps), integral parsial & fraksi parsial (steps), M/M/s umum, simpleks 2 iterasi, **tabel z granular per 0,01 (Φ eksak) + t satu-sisi + binomial kumulatif eksak**, **riwayat sesi per-item + "Jam Emas"** (akurasi per jam belajar), **dropdown Setelan custom dipoles** (animasi + keyboard), audit UX belajar: anti-bypass zeno terkunci, timer ring fix, hint keyboard MC.
 > 🆕 **v1.5**: logo resmi Vista Academy di hero (dipoles: glow mint + float), **KOA 3D dihapus**, **Topologi Pengetahuan 3D** interaktif (drag/zoom/klik simpul) di Beranda + landing + kartu konsep, **bugfix Stats desktop** (grid span), pencarian Peta Skill, export CSV statistik, pengingat backup 14 hari.
 >
 > 🎨 **v1.4: Rebrand palet Vista Academy** — navy `#0B1220` · mint `#55E6C1` · amber `#F5BD67` · blue `#7EA7FF` (token asli diekstrak dari vistaacademy.pages.dev). Lihat `design/brand-preview.png`.
@@ -20,12 +22,12 @@ Semua progress disimpan di `localStorage` perangkat. Export/import via file tere
 ## Test
 
 ```bash
-node tests/run.js    # engine: 13.620 assertion (136 generator × validasi, scheduler, gerbang, kripto)
+node tests/run.js    # engine: 13.620 assertion (142 generator × validasi, scheduler, gerbang, kripto)
 ```
 
-E2E browser nyata (headless Chromium, viewport HP 390px): `tests/e2e.js` (18/18) · **Visual QA matrix `tests/visual.js` (32/32)**: 7 viewport × 4 layar tanpa overflow horizontal, nol error JS, screenshot di `design/` — onboarding → sesi penuh (MC/numeric/steps) → streak → 4 layar → export `.fgy` + dekripsi roundtrip Node → modal konsep → pabrik → **nol error JS**. (Butuh `playwright-core`; sandbox workspace: `/home/user/e2e-work`.)
+E2E browser nyata (headless Chromium): `tests/e2e.js` (25/25) · **Visual QA matrix `tests/visual.js` (32/32)**: 7 viewport × 4 layar tanpa overflow horizontal, nol error JS, screenshot di `design/` — onboarding → sesi penuh (MC/numeric/steps) → streak → 4 layar → export `.fgy` + dekripsi roundtrip Node → modal konsep → pabrik → **nol error JS**. (Butuh `playwright-core`; sandbox workspace: `/home/user/e2e-work`.)
 
-**13.620 assertion engine** + **E2E browser nyata 18/18** (headless Chromium 390px): onboarding → sesi penuh → semua layar → export `.fgy` + dekripsi roundtrip → **NOL error JS**. Generator (**136 node**) diuji 30× (validitas MC/numeric, pembahasan, determinisme), variasi anti-template, scheduler FSRS-lite, gerbang tier, ujian promosi + cooldown 48 jam, roundtrip kripto + tamper-detection, merge, storage fallback.
+**13.992 assertion engine** + **E2E browser nyata 18/18** (headless Chromium 390px): onboarding → sesi penuh → semua layar → export `.fgy` + dekripsi roundtrip → **NOL error JS**. Generator (**136 node**) diuji 30× (validitas MC/numeric, pembahasan, determinisme), variasi anti-template, scheduler FSRS-lite, gerbang tier, ujian promosi + cooldown 48 jam, roundtrip kripto + tamper-detection, merge, storage fallback.
 
 ## Arsitektur (sesuai blueprint `RENCANA-GYM-OTAK.md`)
 
@@ -53,7 +55,7 @@ Modul `engine/scheduler/progression/storage/crypto` **framework-agnostic** — b
 
 ## Yang sudah ada (v1.0)
 
-- **136 node skill** di Tier 0–4 + Universal pack (v1.3: simpleks pivot multi-langkah + tabel, sensitivitas c₁, goal programming, branch & bound) — termasuk **format soal multi-langkah (steps)**: Gauss, rumus kuadrat, M/M/2; dualitas LP, EOQ diskon, P/Q & ABC, WMA, trend LSQ, indeks musiman, Monte Carlo
+- **142 node skill** di Tier 0–4 + Universal pack (v1.3: simpleks pivot multi-langkah + tabel, sensitivitas c₁, goal programming, branch & bound) — termasuk **format soal multi-langkah (steps)**: Gauss, rumus kuadrat, M/M/2; dualitas LP, EOQ diskon, P/Q & ABC, WMA, trend LSQ, indeks musiman, Monte Carlo
 - **Loop harian**: Warm-up rush (8 soal mental) → Review SRS interleaved → Fokus node baru (8 soal) → Ringkasan + badge
 - **FSRS-lite**: jadwal review per skill, status baru→belajar→lancar→mastered→memudar
 - **Progresi keras**: mastery 90% + volume 400 soal/tier + sehat + **ujian promosi 25 soal (lulus ≥85%, tiap domain ≥70%, cooldown 48 jam)**

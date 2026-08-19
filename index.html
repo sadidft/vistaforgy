@@ -247,6 +247,51 @@ input[type=range]{accent-color:var(--amber);width:160px}
 .koa-gear-r{animation:gearspin 7s linear infinite reverse;transform-origin:0 0}
 .koa-antenna{animation:koapulse 2.6s ease-in-out infinite}
 .koa-oops .koa-mouth{d:path("M50 64 Q60 60 70 64")}
+/* ===== v1.6 SWEEP UI/UX ===== */
+/* gap antar panel di layar non-bento (setelan/data) — fix "nempel dempetan" */
+.screen>.panel+.panel{margin-top:14px}
+.screen>.panel:last-child{margin-bottom:4px}
+/* transisi halaman */
+.screen{animation:screenin .32s cubic-bezier(.2,.9,.3,1) both}
+@keyframes screenin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* kv: sisi kanan bisa berisi tombol, rapi & tidak dempet */
+.kv{flex-wrap:wrap;gap:6px 10px}
+.kv-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
+/* onboarding: jarak tombol ↔ catatan ↔ kalibrasi (fix "mepet") */
+.ob-form .btn-row{margin:16px 0 12px}
+.ob-form .btn-row .btn{margin-bottom:2px}
+#calibBox{margin-top:16px}
+#calibBox .qcard{animation:qin .3s both}
+.ob-hero{gap:12px;margin-bottom:22px}
+/* modal: tombol tutup */
+.modal-x{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--mut);
+  font-size:26px;line-height:1;cursor:pointer;padding:6px 10px;border-radius:10px;transition:.2s}
+.modal-x:hover{color:var(--tx);background:rgba(148,163,184,.12)}
+.modal{position:relative;padding-right:14px}
+/* runner header tahan layar sempit */
+.run-head{flex-wrap:wrap;gap:8px}
+.run-prog{flex:1 1 120px;min-width:90px}
+/* fokus keyboard konsisten (mint) */
+.btn:focus-visible,.mc-opt:focus-visible,.key:focus-visible,.dd-btn:focus-visible,
+.nav-btn:focus-visible,.step-in:focus-visible,.node-chip:focus-visible{outline:2px solid rgba(85,230,193,.7);outline-offset:2px}
+/* toggle-row mobile: label & kontrol bisa naik-turun baris dengan rapi */
+.toggle-row{flex-wrap:wrap}
+.toggle-row>span{flex:1 1 160px}
+.dd-inline{min-width:160px}
+/* range full-width saat sendirian di baris kecil */
+@media(max-width:520px){.toggle-row input[type=range]{width:100%}}
+/* scrollbar gelap halus */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:rgba(148,163,184,.25);border-radius:8px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:rgba(148,163,184,.4)}
+::-webkit-scrollbar-track{background:transparent}
+/* heatmap legend */
+.hm-legend{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:6px;font-size:.68rem;color:var(--mut)}
+.hm-legend .hm-cell{width:9px;height:9px}
+/* map: pesan kosong pencarian */
+.map-empty{padding:14px;color:var(--mut);font-size:.86rem;text-align:center}
+/* empty state ringan */
+.panel .muted.small:first-child{margin-top:2px}
 /* dropdown custom */
 .dd{position:relative;min-width:190px}
 .dd-inline{min-width:170px}

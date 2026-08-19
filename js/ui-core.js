@@ -76,6 +76,11 @@
   UI.modal = function (html, cls, opts) {
     var ov = UI.el('div', 'modal-ov');
     var box = UI.el('div', 'modal ' + (cls || ''), html);
+    var xbtn = UI.el('button', 'modal-x', '&times;');
+    xbtn.type = 'button';
+    xbtn.setAttribute('aria-label', 'Tutup');
+    xbtn.addEventListener('click', function () { close(); });
+    box.appendChild(xbtn);
     ov.appendChild(box);
     document.body.appendChild(ov);
     requestAnimationFrame(function () { ov.classList.add('show'); });
@@ -219,7 +224,10 @@
       var lvl = q === 0 ? 0 : q < 10 ? 1 : q < 25 ? 2 : q < 50 ? 3 : 4;
       cells += '<span class="hm-cell lvl' + lvl + '" title="' + key + ': ' + q + ' soal"></span>';
     }
-    return '<div class="heatmap">' + cells + '</div>';
+    return '<div class="heatmap">' + cells + '</div>' +
+      '<div class="hm-legend"><span>dikit</span>' +
+      [0, 1, 2, 3, 4].map(function (l) { return '<span class="hm-cell lvl' + l + '"></span>'; }).join('') +
+      '<span>banyak</span></div>';
   };
 
   /* ---------- visual soal ---------- */
