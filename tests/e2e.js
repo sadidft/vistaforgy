@@ -1,0 +1,174 @@
+/* Vista Forgy — E2E test (browser nyata, headless chromium via playwright-core)
+   Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/e2e.js */
+'use strict';
+const { chromium } = require('/home/user/e2e-work/node_modules/playwright-core');
+const fs = require('fs');
+const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
+
+let pass = 0, fail = 0;
+function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } else { fail++; console.log('  ✗ ' + name); } }
+
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); // ukuran iPhone
+  const errors = [];
+  page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message));
+  page.on('console', m => {
+    if (m.type() === 'error' && !/favicon|manifest|Failed to load resource|net::ERR/.test(m.text())) errors.push('CONSOLE: ' + m.text());
+  });
+
+  console.log('== VISTA FORGY E2E (mobile 390px) ==');
+
+  // 1. Onboarding
+  await page.goto(APP);
+  await page.waitForSelector('#obGo', { timeout: 8000 });
+  ok(true, 'app dimuat tanpa error awal');
+  await page.fill('#obNama', 'E2E Forge-er');
+  await page.click('#obGo');
+  await page.waitForSelector('#btnStart', { timeout: 5000 });
+  ok(true, 'onboarding → beranda');
+
+  // 2. Sesi harian penuh: warm-up + review + fokus (kalibrasi node baru: semua unlocked tier 0 pertama)
+  await page.click('#btnStart');
+  let summary = false, answered = 0, sawMc = 0, sawNumeric = 0, sawSteps = 0;
+  for (let i = 0; i < 80; i++) {
+    if (await page.$('.summary')) { summary = true; break; }
+    if (await page.$('.mc-opt')) { sawMc++; await (await page.$('.mc-opt')).click(); }
+    else if (await page.$('#numGo')) {
+      sawNumeric++;
+      await page.keyboard.type('4');
+      await page.keyboard.press('Enter');
+    } else if (await page.$('#stepsGo')) {
+      sawSteps++;
+      const ins = await page.$$('.step-in');
+      for (const inp of ins) await inp.fill('2');
+      await (await page.$('#stepsGo')).click();
+    } else { await page.waitForTimeout(300); continue; }
+    answered++;
+    const fb = await page.waitForSelector('#fbNext', { timeout: 5000 }).catch(() => null);
+    if (fb) { await fb.click(); }
+    await page.waitForTimeout(120);
+  }
+  ok(summary, 'sesi harian tuntas sampai ringkasan (' + answered + ' soal: mc=' + sawMc + ', numeric=' + sawNumeric + ', steps=' + sawSteps + ')');
+  const pct = await page.textContent('.score-huge, .stat-big').catch(() => '?');
+  ok(true, 'ringkasan tampil (akurasi ' + String(pct).trim() + ')');
+
+  // 3. Streak tercatat
+  await page.click('#sumHome');
+  await page.waitForSelector('#streakNum', { timeout: 4000 });
+  await page.waitForFunction(() => (document.querySelector('#streakNum') || {}).textContent === '1', { timeout: 4000 }).catch(() => {});
+  const streak = await page.textContent('#streakNum');
+  ok(streak.trim() === '1', 'streak harian tercatat = 1 (dapat ' + streak.trim() + ')');
+
+  // 3b. Zeno: numeric keypad path (dat.tabel = isian numeric, selalu terbuka)
+  await page.goto(APP + '#/run?mode=zeno&node=dat.tabel');
+  await page.waitForSelector('#numGo', { timeout: 5000 });
+  await page.keyboard.type('42');
+  await page.keyboard.press('Enter');
+  const fbNum = await page.waitForSelector('#fbNext', { timeout: 4000 }).catch(() => null);
+  ok(!!fbNum, 'jalur jawaban NUMERIC (keyboard) bekerja');
+  if (fbNum) await fbNum.click();
+
+  // 3c. Zeno: steps path (lin.gauss) — buka prasyaratnya dulu di save lokal
+  await page.goto(APP + '#/home');
+  await page.waitForSelector('#btnStart', { timeout: 4000 }).catch(() => {});
+  await page.evaluate(() => {
+    const s = JSON.parse(localStorage.getItem('vf.save'));
+    s.tiers.unlocked = 3;
+    s.skills['lin.mtops'] = { elo: 1250, D: 4, S: 5, lastReviewTs: Date.now(), dueTs: 0, streakBenar: 2, medianMs: 8000, attempts: 9, status: 'lancar', hist: [1, 1] };
+    localStorage.setItem('vf.save', JSON.stringify(s));
+  });
+  await page.reload(); // hash-only nav tidak reload — paksa boot ulang agar seed terbaca
+  await page.waitForSelector('#btnStart', { timeout: 5000 });
+  const rsNo = await page.$('#rsNo'); // modal resume sesi bisa muncul & menghalangi klik
+  if (rsNo) await rsNo.click();
+  await page.evaluate(() => { location.hash = '#/run?mode=zeno&node=lin.gauss'; });
+  await page.waitForSelector('#stepsGo', { timeout: 5000 }).catch(() => {});
+  if (await page.$('#stepsGo')) {
+    const ins = await page.$$('.step-in');
+    for (const inp of ins) await inp.fill('2');
+    await page.click('#stepsGo');
+    const fbS = await page.waitForSelector('#fbNext', { timeout: 4000 }).catch(() => null);
+    ok(!!fbS && (await page.$('.step-row.ok, .step-row.no')) !== null, 'jalur jawaban STEPS (multi-langkah) bekerja + penilaian per langkah');
+    if (fbS) await fbS.click();
+  } else ok(false, 'jalur STEPS: soal tidak muncul');
+
+  // 4. Navigasi semua layar tanpa error
+  for (const [hash, sel] of [['#/map', '.tier-sec'], ['#/stats', '.heatmap'], ['#/data', '#btnExport'], ['#/settings', '#btnReset']]) {
+    await page.goto(APP + hash);
+    await page.waitForSelector(sel, { timeout: 4000 });
+    ok(true, 'layar ' + hash.replace('#/', '') + ' render OK');
+  }
+
+  // 5. Export .fgy (Web Crypto di browser NYATA) + roundtrip dekripsi di Node
+  await page.goto(APP + '#/data');
+  await page.waitForSelector('#expPw', { timeout: 4000 });
+  ok(page.url().indexOf('#/data') >= 0, 'menu data terbuka');
+  const [download] = await Promise.all([
+    page.waitForEvent('download', { timeout: 15000 }),
+    (async () => {
+      await page.fill('#expPw', 'rahasiae2e');
+      await page.fill('#expPw2', 'rahasiae2e');
+      await page.click('#btnExport');
+    })()
+  ]);
+  const fgyPath = '/tmp/e2e-export.fgy';
+  await download.saveAs(fgyPath);
+  const buf = fs.readFileSync(fgyPath);
+  ok(buf.length > 40 && buf[0] === 0x56 && buf[1] === 0x46 && buf[2] === 0x47 && buf[3] === 0x59 && buf[4] === 0x31,
+    'file .fgy terunduh dengan magic VFGY1 (' + buf.length + ' B)');
+
+  // dekripsi dengan implementasi crypto.js yang sama (node webcrypto)
+  global.window = global;
+  eval(fs.readFileSync('/home/user/vista-forgy/js/crypto.js', 'utf8'));
+  const dec = await global.VF.CRYPTO.decryptSave(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), 'rahasiae2e');
+  ok(dec && dec.profile.name === 'E2E Forge-er' && dec.skills && Object.keys(dec.skills).length > 0,
+    'roundtrip browser→Node: file terdekripsi, data utuh (' + Object.keys(dec.skills).length + ' skill)');
+  let threw = false;
+  try { await global.VF.CRYPTO.decryptSave(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), 'salahpw'); } catch (e) { threw = true; }
+  ok(threw, 'password salah ditolak (E2E)');
+
+  // 6. Resume sesi & modal konsep tidak error
+  await page.goto(APP + '#/map');
+  await page.waitForSelector('.node-chip', { timeout: 4000 });
+  await (await page.$('.node-chip')).click();
+  await page.waitForSelector('#nmCard', { timeout: 3000 });
+  await page.click('#nmCard');
+  await page.waitForSelector('.formula, .concept', { timeout: 3000 });
+  ok(true, 'modal detail node + kartu konsep render OK');
+  await page.keyboard.press('Escape');
+
+  // 6b. Dropdown custom Setelan (v1.5.2): ganti tema → data-theme berubah
+  await page.goto(APP + '#/settings');
+  await page.waitForSelector('#ddTheme .dd-btn', { timeout: 4000 });
+  await page.click('#ddTheme .dd-btn');
+  await page.waitForSelector('#ddTheme .dd-list.open, #ddTheme.dd.open', { timeout: 3000 }).catch(() => {});
+  const lightOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Terang/.test(o.textContent)));
+  if (lightOpt >= 0) {
+    await (await page.$$('#ddTheme .dd-opt'))[lightOpt].click();
+    await page.waitForTimeout(300);
+    const th = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+    ok(th === 'light', 'dropdown tema bekerja → light mode aktif');
+    await page.click('#ddTheme .dd-btn');
+    const darkOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Gelap/.test(o.textContent)));
+    await (await page.$$('#ddTheme .dd-opt'))[darkOpt].click();
+  } else ok(false, 'opsi Tema Terang tidak ditemukan');
+
+  // 6c. Zeno terkunci ditolak (v1.5.3 audit)
+  await page.goto(APP + '#/run?mode=zeno&node=rso.simpleks2');
+  await page.waitForTimeout(700);
+  const stillHome = await page.evaluate(() => location.hash.indexOf('#/home') >= 0 || !!document.querySelector('#btnStart'));
+  ok(stillHome, 'zeno pada node terkunci ditolak & dialihkan (anti-bypass gerbang)');
+
+  // 7. KOA 3D / pabrik tidak menjatuhkan halaman (home setelah semuanya)
+  await page.goto(APP + '#/home');
+  await page.waitForSelector('#btnStart', { timeout: 4000 });
+  ok((await page.$('#factoryCv')) !== null, 'pabrik isometrik dirender di beranda');
+
+  // 8. Verdict error JS
+  ok(errors.length === 0, 'NOL error JS sepanjang seluruh alur' + (errors.length ? ' → ' + errors.slice(0, 5).join(' | ') : ''));
+
+  await browser.close();
+  console.log('\n== E2E HASIL: ' + pass + ' OK, ' + fail + ' GAGAL ==');
+  process.exit(fail ? 1 : 0);
+})().catch(e => { console.error('E2E FATAL:', e.message); process.exit(1); });
