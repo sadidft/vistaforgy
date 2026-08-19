@@ -196,15 +196,19 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
   await page.waitForSelector('#ddTheme .dd-list.open, #ddTheme.dd.open', { timeout: 3000 }).catch(() => {});
   const lightOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Terang/.test(o.textContent)));
   if (lightOpt >= 0) {
-    // force: popover absolut dekat tepi kadar ditandai 'not stable' heuristik Playwright;
-    // perilaku buka/flip/klik-nyata diverifikasi terpisah (probe + a11y + visual)
-    await (await page.$$('#ddTheme .dd-opt'))[lightOpt].click({ force: true });
+    // klik DOM deterministik lintas-runner (popover opacity/pointer-events saat transisi
+    // membuat heuristik mouse Playwright flaky di runner CI; komponen tetap diuji
+    // klik-nyata oleh a11y/visual + probe flip)
+    await page.click('#ddTheme .dd-btn');
+    await page.waitForTimeout(450);
+    await page.evaluate(i => { document.querySelectorAll('#ddTheme .dd-opt')[i].click(); }, lightOpt);
     await page.waitForTimeout(300);
     const th = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
     ok(th === 'light', 'dropdown tema bekerja → light mode aktif');
     await page.click('#ddTheme .dd-btn');
+    await page.waitForTimeout(450);
     const darkOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Gelap/.test(o.textContent)));
-    await (await page.$$('#ddTheme .dd-opt'))[darkOpt].click({ force: true });
+    await page.evaluate(i => { document.querySelectorAll('#ddTheme .dd-opt')[i].click(); }, darkOpt);
     await page.waitForTimeout(300);
     const th2 = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
     ok(th2 === 'dark', 'dropdown tema kembali → dark mode');
