@@ -106,8 +106,10 @@
     btn.type = 'button';
     btn.setAttribute('aria-haspopup', 'listbox');
     btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', (opts.aria ? opts.aria + ': ' : '') + labelOf(value));
     var list = UI.el('div', 'dd-list');
     list.setAttribute('role', 'listbox');
+    list.setAttribute('aria-label', (opts.aria || 'Pilihan') + ' — daftar opsi');
     var ics = items.map(function (it) {
       var o = UI.el('button', 'dd-opt' + (it.v === value ? ' sel' : ''), UI.esc(it.label));
       o.type = 'button';
@@ -120,7 +122,10 @@
     host.appendChild(btn); host.appendChild(list);
     var open = false, hi = -1;
     function labelOf(v) { var f = items.filter(function (i2) { return String(i2.v) === String(v); })[0]; return f ? f.label : String(v); }
-    function sync() { btn.querySelector('.dd-val').textContent = labelOf(value); }
+    function sync() {
+      btn.querySelector('.dd-val').textContent = labelOf(value);
+      btn.setAttribute('aria-label', (opts.aria ? opts.aria + ': ' : '') + labelOf(value));
+    }
     function setOpen(o) {
       open = o;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -321,7 +326,7 @@
       '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' +
       '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' + dots + '</svg>' +
       '<div class="lp-slider"><span class="muted small">geser garis tujuan:</span>' +
-      '<input type="range" min="0" max="' + (spec.zmax * 1.15).toFixed(1) + '" value="' + z0 + '" step="0.5" data-lpuid="' + uid + '" data-obj1="' + spec.obj[0] + '" data-obj2="' + spec.obj[1] + '" data-xmax="' + xmax + '" data-ymax="' + ymax + '" data-w="' + W + '" data-h="' + H + '" data-p="' + P + '">' +
+      '<input aria-label="Garis tujuan Z" type="range" min="0" max="' + (spec.zmax * 1.15).toFixed(1) + '" value="' + z0 + '" step="0.5" data-lpuid="' + uid + '" data-obj1="' + spec.obj[0] + '" data-obj2="' + spec.obj[1] + '" data-xmax="' + xmax + '" data-ymax="' + ymax + '" data-w="' + W + '" data-h="' + H + '" data-p="' + P + '">' +
       '<b class="lp-z" data-zfor="' + uid + '">Z = ' + String(z0).replace('.', ',') + '</b></div>';
   }
 

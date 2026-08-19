@@ -1,7 +1,7 @@
 # 📋 VISTA FORGY — BACKLOG RESMI
 
 > Dokumen jujur apa yang sudah/belum dibangun. Diperbarui per versi.
-> **v1.6.3 — 19 Agustus 2026 (repo: github.com/sadidft/vistaforgy)**
+> **v1.6.5 — 19 Agustus 2026 (repo: github.com/sadidft/vistaforgy)**
 
 ## ✅ SELESAI (v1.1)
 
@@ -44,9 +44,9 @@ Logo resmi Vista Academy (disedot dari vistaacademy.pages.dev, dipoles: ring min
 | 1 | Konten steps tambahan: Gauss 3×3 full, Cramer 2×2/3×3, integral parsial & fraksi parsial, M/M/s umum (s>2), simpleks iterasi ke-2 + interpretasi slack | mudah — pola family & format steps sudah ada |
 | 2 | Tabel distribusi lebih granular (z per 0,01; t satu sisi; binomial kumulatif) — sekarang versi ringkas | mudah — data saja |
 | 3 | Histori sesi per-item (bukan agregat) + statistik per jam-belajar | sedang |
-| 4 | E2E WebKit (Safari-engine) + audit axe + Lighthouse CI formal | Firefox & Chromium ✅ (v1.6.3); WebKit tersisa |
+| 4 | ~~audit axe~~ ✅ 6/6 nol serious · ~~Lighthouse~~ ✅ 93/100/100/100 · WebKit = job CI eksperimental (lokal diblokir lib sandbox; jalan di runner GitHub) |
 | 5 | ~~CI~~ ✅ v1.6.3 (`.github/workflows/ci.yml`) · ~~changelog~~ ✅ `CHANGELOG.md` manual-detail |
-| 6 | Mode multi-profil satu device (switch akun lokal) | opsional |
+| 6 | ~~multi-profil~~ ✅ v1.6.5 (panel Profil, slot `vf.p:<nama>`, E2E 4 test) |
 
 ## 🎯 Filosofi backlog
 

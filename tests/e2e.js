@@ -2,7 +2,7 @@
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/e2e.js */
 'use strict';
 const pw = require(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core');
-const BROWSER = process.env.PW_BROWSER === 'firefox' ? pw.firefox : pw.chromium;
+const BROWSER = process.env.PW_BROWSER === 'firefox' ? pw.firefox : process.env.PW_BROWSER === 'webkit' ? pw.webkit : pw.chromium;
 const fs = require('fs');
 const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
 
@@ -209,6 +209,29 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
   await page.waitForTimeout(700);
   const stillHome = await page.evaluate(() => location.hash.indexOf('#/home') >= 0 || !!document.querySelector('#btnStart'));
   ok(stillHome, 'zeno pada node terkunci ditolak & dialihkan (anti-bypass gerbang)');
+
+  // 6d. Multi-profil (v1.6.5): buat profil baru → aktif; kembali ke utama → progress asli utuh
+  await page.goto(APP + '#/settings');
+  await page.waitForSelector('#profAdd', { timeout: 5000 });
+  const profBefore = await page.evaluate(() => localStorage.getItem('vf.streak-test', 0) === null && (window.VF.save.streak.current));
+  await page.fill('#profName', 'Kedua');
+  await page.click('#profAdd');
+  await page.waitForTimeout(1400); // reload + boot
+  await page.waitForSelector('#profList', { timeout: 6000 });
+  const aktif2 = await page.evaluate(() => document.querySelector('#profList').textContent);
+  ok(/Kedua\s*·\s*aktif/.test(aktif2), 'profil baru "Kedua" dibuat & aktif');
+  const streakBaru = await page.evaluate(() => window.VF.save.streak.current);
+  ok(streakBaru === 0, 'profil baru mulai bersih (streak 0)');
+  // kembali ke utama
+  await page.click('.prof-sw[data-n="utama"]');
+  await page.waitForSelector('#psY', { timeout: 4000 });
+  await page.click('#psY');
+  await page.waitForTimeout(1400);
+  await page.waitForSelector('#profList', { timeout: 6000 });
+  const aktif3 = await page.evaluate(() => document.querySelector('#profList').textContent);
+  ok(/utama\s*·\s*aktif/.test(aktif3), 'kembali ke profil "utama"');
+  const streakAsli = await page.evaluate(() => window.VF.save.streak.current);
+  ok(streakAsli >= 1, 'progress profil utama utuh (streak ' + streakAsli + ')');
 
   // 7. KOA 3D / pabrik tidak menjatuhkan halaman (home setelah semuanya)
   await page.goto(APP + '#/home');

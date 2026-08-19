@@ -28,6 +28,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 #app{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 18px calc(96px + env(safe-area-inset-bottom))}
 h1,h2,h3{font-family:var(--font-ui);letter-spacing:-.02em}
 h1{font-size:1.7rem;margin-bottom:6px}h2{font-size:1.15rem}h3{font-size:1rem}
+.panel h2.ph{font-size:1rem;letter-spacing:0}
 b{color:var(--tx)}
 .muted{color:var(--mut)}.small{font-size:.82rem}.narrow{max-width:640px}
 .mut::after{}
@@ -445,8 +446,8 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
 </style>
 </head>
 <body>
-<canvas id="particles"></canvas>
-<div id="toasts"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div id="toasts" role="region" aria-label="Notifikasi"></div>
 <main id="app"></main>
 <nav class="bottom" aria-label="Navigasi utama">
   <button class="nav-btn" data-path="home"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></svg>Beranda</button>
@@ -5802,6 +5803,56 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
     } catch (e) {}
   };
 
+  /* ---------- multi-profil (v1.6.5) ----------
+     vf.active  = nama profil aktif; vf.save = data AKTIF (kompatibilitas penuh dgn .fgy).
+     vf.profiles = indeks; vf.p:<nama> = slot per profil. */
+  STORE.profileIndex = function () {
+    try { return JSON.parse(lsGet('vf.profiles') || '[]'); } catch (e) { return []; }
+  };
+  STORE.activeProfile = function () { return lsGet('vf.active') || 'utama'; };
+  STORE.ensureDefaultProfile = function () {
+    if (!lsGet('vf.active')) {
+      lsSet('vf.active', 'utama');
+      var idx = STORE.profileIndex();
+      if (!idx.some(function (p) { return p.name === 'utama'; })) {
+        idx.push({ name: 'utama', createdAt: Date.now() });
+        lsSet('vf.profiles', JSON.stringify(idx));
+      }
+    }
+  };
+  STORE.saveCurrentToSlot = function () {
+    var raw = lsGet(KEY);
+    if (raw) lsSet('vf.p:' + STORE.activeProfile(), raw);
+    var idx = STORE.profileIndex();
+    var name = STORE.activeProfile();
+    if (!idx.some(function (p) { return p.name === name; })) { idx.push({ name: name, createdAt: Date.now() }); lsSet('vf.profiles', JSON.stringify(idx)); }
+  };
+  STORE.switchProfile = function (name) {
+    var slot = lsGet('vf.p:' + name);
+    if (!slot) return false;
+    STORE.saveCurrentToSlot();
+    lsSet(KEY, slot);
+    lsSet('vf.active', name);
+    return true;
+  };
+  STORE.createProfile = function (name, freshSave) {
+    if (!name || lsGet('vf.p:' + name)) return false;
+    STORE.saveCurrentToSlot();
+    lsSet('vf.p:' + name, JSON.stringify(freshSave));
+    lsSet(KEY, JSON.stringify(freshSave));
+    lsSet('vf.active', name);
+    var idx = STORE.profileIndex();
+    idx.push({ name: name, createdAt: Date.now() });
+    lsSet('vf.profiles', JSON.stringify(idx));
+    return true;
+  };
+  STORE.deleteProfile = function (name) {
+    if (name === STORE.activeProfile()) return false;
+    lsDel('vf.p:' + name);
+    lsSet('vf.profiles', JSON.stringify(STORE.profileIndex().filter(function (p) { return p.name !== name; })));
+    return true;
+  };
+
   STORE.usage = function () {
     var raw = lsGet(KEY) || '';
     return { bytes: raw.length, kb: Math.round(raw.length / 102.4) / 10, limitKb: 5120 };
@@ -6430,8 +6481,10 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
     btn.type = 'button';
     btn.setAttribute('aria-haspopup', 'listbox');
     btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', (opts.aria ? opts.aria + ': ' : '') + labelOf(value));
     var list = UI.el('div', 'dd-list');
     list.setAttribute('role', 'listbox');
+    list.setAttribute('aria-label', (opts.aria || 'Pilihan') + ' — daftar opsi');
     var ics = items.map(function (it) {
       var o = UI.el('button', 'dd-opt' + (it.v === value ? ' sel' : ''), UI.esc(it.label));
       o.type = 'button';
@@ -6444,7 +6497,10 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
     host.appendChild(btn); host.appendChild(list);
     var open = false, hi = -1;
     function labelOf(v) { var f = items.filter(function (i2) { return String(i2.v) === String(v); })[0]; return f ? f.label : String(v); }
-    function sync() { btn.querySelector('.dd-val').textContent = labelOf(value); }
+    function sync() {
+      btn.querySelector('.dd-val').textContent = labelOf(value);
+      btn.setAttribute('aria-label', (opts.aria ? opts.aria + ': ' : '') + labelOf(value));
+    }
     function setOpen(o) {
       open = o;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -6645,7 +6701,7 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' +
       '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' + dots + '</svg>' +
       '<div class="lp-slider"><span class="muted small">geser garis tujuan:</span>' +
-      '<input type="range" min="0" max="' + (spec.zmax * 1.15).toFixed(1) + '" value="' + z0 + '" step="0.5" data-lpuid="' + uid + '" data-obj1="' + spec.obj[0] + '" data-obj2="' + spec.obj[1] + '" data-xmax="' + xmax + '" data-ymax="' + ymax + '" data-w="' + W + '" data-h="' + H + '" data-p="' + P + '">' +
+      '<input aria-label="Garis tujuan Z" type="range" min="0" max="' + (spec.zmax * 1.15).toFixed(1) + '" value="' + z0 + '" step="0.5" data-lpuid="' + uid + '" data-obj1="' + spec.obj[0] + '" data-obj2="' + spec.obj[1] + '" data-xmax="' + xmax + '" data-ymax="' + ymax + '" data-w="' + W + '" data-h="' + H + '" data-p="' + P + '">' +
       '<b class="lp-z" data-zfor="' + uid + '">Z = ' + String(z0).replace('.', ',') + '</b></div>';
   }
 
@@ -7249,49 +7305,108 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
     var s = save.settings;
     var html = '<section class="screen narrow"><h1>Pengaturan</h1>' +
       '<div class="panel"><label class="field"><span>Nama panggilan</span><input id="setNama" type="text" maxlength="20" value="' + esc(save.profile.name) + '"></label>' +
-      '<label class="field"><span>Target harian</span><div class="dd" id="ddGoal"></div></label>' +
-      '<label class="field"><span>Track</span><div class="dd" id="ddTrack"></div></label></div>' +
+      '<div class="field"><span>Target harian</span><div class="dd" id="ddGoal"></div></div>' +
+      '<div class="field"><span>Track</span><div class="dd" id="ddTrack"></div></div></div>' +
       '<div class="panel">' +
       '<div class="toggle-row"><span>' + ic('zap') + ' Efek suara</span><button class="toggle ' + (s.sound ? 'on' : '') + '" id="setSound"></button></div>' +
-      '<div class="toggle-row"><span>Volume</span><input type="range" id="setVol" min="0" max="100" value="' + Math.round(s.volume * 100) + '"></div>' +
+      '<div class="toggle-row"><span>Volume</span><input aria-label="Volume suara" type="range" id="setVol" min="0" max="100" value="' + Math.round(s.volume * 100) + '"></div>' +
       '<div class="toggle-row"><span>' + ic('info') + ' Serius Mode (matikan humor KOA)</span><button class="toggle ' + (s.serious ? 'on' : '') + '" id="setSerious"></button></div>' +
       '<div class="toggle-row"><span>Animasi</span><div class="dd dd-inline" id="ddMotion"></div></div>' +
       '<div class="toggle-row"><span>Tema</span><div class="dd dd-inline" id="ddTheme"></div></div></div>' +
-      '<div class="panel"><h3>Pelajari sistemnya</h3><div class="btn-row">' +
+      '<div class="panel"><h2 class="ph">Profil</h2>' +
+      '<div id="profList"></div>' +
+      '<div class="field" style="margin-top:10px"><span>Profil baru (mis. teman yang pinjam device-mu)</span>' +
+      '<input id="profName" type="text" maxlength="16" placeholder="nama profil" aria-label="Nama profil baru"></div>' +
+      '<button class="btn ghost small" id="profAdd">Tambah profil & pindah</button>' +
+      '<p class="muted small">Progress tiap profil terpisah penuh (slot lokal sendiri). Profil aktif otomatis tersimpan ke slotnya saat pindah.</p></div>' +
+      '<div class="panel"><h2 class="ph">Pelajari sistemnya</h2><div class="btn-row">' +
       '<button class="btn ghost" id="btnAboutSrs">' + ic('book') + ' Cara kerja repetisi (SRS)</button>' +
       '<button class="btn ghost" id="btnGlossary">' + ic('info') + ' Glosarium istilah</button></div></div>' +
-      '<div class="panel danger-zone"><h3>Zona Merah</h3><p class="muted small">Menghapus seluruh progress. Aplikasi akan menawarkan export dulu.</p>' +
+      '<div class="panel danger-zone"><h2 class="ph">Zona Merah</h2><p class="muted small">Menghapus seluruh progress. Aplikasi akan menawarkan export dulu.</p>' +
       '<button class="btn danger" id="btnReset">' + ic('alert') + ' Reset Progress</button></div></section>';
     UI.$('#app').innerHTML = html;
     UI.$('#setNama').onchange = function () { save.profile.name = this.value.trim(); VF.persist(); };
     UI.dropdown(UI.$('#ddGoal'), {
+      aria: 'Target harian',
       value: save.profile.dailyGoalMin,
       items: [{ v: 15, label: '15 menit' }, { v: 25, label: '25 menit' }, { v: 40, label: '40 menit' }],
       onChange: function (v) { save.profile.dailyGoalMin = parseInt(v, 10); VF.persist(); VF.AUDIO.click(save); }
     });
     UI.dropdown(UI.$('#ddTrack'), {
+      aria: 'Track',
       value: save.profile.track,
       items: [{ v: 'ti', label: 'Teknik Industri' }, { v: 'both', label: 'Semua (TI + Universal)' }],
       onChange: function (v) { save.profile.track = v; VF.persist(); VF.AUDIO.click(save); }
     });
-    function tgl(id, key, cb) {
+    function tgl(id, key, label, cb) {
       var b = UI.$(id);
-      b.onclick = function () { save.settings[key] = !save.settings[key]; b.classList.toggle('on', save.settings[key]); VF.persist(); if (cb) cb(save.settings[key]); };
+      function sync() {
+        b.classList.toggle('on', save.settings[key]);
+        b.setAttribute('aria-pressed', save.settings[key] ? 'true' : 'false');
+        b.setAttribute('aria-label', label + ': ' + (save.settings[key] ? 'aktif' : 'nonaktif'));
+      }
+      sync();
+      b.onclick = function () { save.settings[key] = !save.settings[key]; sync(); VF.persist(); if (cb) cb(save.settings[key]); };
     }
-    tgl('#setSound', 'sound');
-    tgl('#setSerious', 'serious', function (on) { var l = VF.KOA.line(save, on ? 'serius-on' : 'serius-off'); if (l) UI.toast(esc(l)); });
+    tgl('#setSound', 'sound', 'Efek suara');
+    tgl('#setSerious', 'serious', 'Serius Mode', function (on) { var l = VF.KOA.line(save, on ? 'serius-on' : 'serius-off'); if (l) UI.toast(esc(l)); });
     UI.$('#setVol').oninput = function () { save.settings.volume = this.value / 100; };
     UI.$('#setVol').onchange = function () { VF.persist(); VF.AUDIO.correct(save); };
     UI.dropdown(UI.$('#ddMotion'), {
+      aria: 'Animasi',
       value: s.motion,
       items: [{ v: 'auto', label: 'Ikut sistem' }, { v: 'full', label: 'Penuh' }, { v: 'reduced', label: 'Kurangi' }],
       onChange: function (v) { save.settings.motion = v; VF.applyMotion(); VF.persist(); }
     });
     UI.dropdown(UI.$('#ddTheme'), {
+      aria: 'Tema',
       value: s.theme,
       items: [{ v: 'dark', label: 'Gelap (default)' }, { v: 'light', label: 'Terang' }],
       onChange: function (v) { save.settings.theme = v; VF.applyTheme(); VF.persist(); }
     });
+    // ===== multi-profil (v1.6.5) =====
+    STORE.ensureDefaultProfile();
+    function renderProfiles() {
+      var host = UI.$('#profList');
+      if (!host) return;
+      var active = STORE.activeProfile();
+      var idx = STORE.profileIndex();
+      if (!idx.some(function (p) { return p.name === active; })) idx.push({ name: active });
+      host.innerHTML = idx.map(function (p) {
+        var isA = p.name === active;
+        return '<div class="kv"><span>' + esc(p.name) + (isA ? ' <b class="ok">· aktif</b>' : '') + '</span>' +
+          '<span class="kv-r">' + (isA ? '' : '<button class="mini-btn prof-sw" data-n="' + esc(p.name) + '">pindah</button>') +
+          (isA ? '' : ' <button class="mini-btn prof-del" data-n="' + esc(p.name) + '">hapus</button>') + '</span></div>';
+      }).join('');
+      UI.$$('.prof-sw', host).forEach(function (b) {
+        b.onclick = function () {
+          var n = b.getAttribute('data-n');
+          var m = UI.modal('<div class="concept"><h2>Pindah ke "' + esc(n) + '"?</h2><p>Progress profil saat ini otomatis disimpan ke slotnya dulu.</p>' +
+            '<div class="btn-row"><button class="btn primary" id="psY">Pindah</button><button class="btn ghost" id="psN">Batal</button></div></div>');
+          UI.$('#psY', m.box).onclick = function () {
+            if (STORE.switchProfile(n)) { m.close(); location.reload(); } // JANGAN persist di sini: switchProfile sudah menulis slot; persist akan menimpa dgn save in-memory basi
+            else { UI.toast('Slot profil kosong/rusak.', 'warn'); m.close(); }
+          };
+          UI.$('#psN', m.box).onclick = m.close;
+        };
+      });
+      UI.$$('.prof-del', host).forEach(function (b) {
+        b.onclick = function () { STORE.deleteProfile(b.getAttribute('data-n')); renderProfiles(); };
+      });
+    }
+    renderProfiles();
+    UI.$('#profAdd').onclick = function () {
+      var n = UI.$('#profName').value.trim();
+      if (!n) { UI.toast('Isi nama profil dulu.', 'warn'); return; }
+      VF.persist();
+      var fresh = STORE.newSave();
+      fresh.settings = JSON.parse(JSON.stringify(VF.save.settings));
+      if (STORE.createProfile(n, fresh)) {
+        UI.toast('Profil "' + esc(n) + '" dibuat & aktif.', 'ok');
+        setTimeout(function () { location.reload(); }, 600);
+      } else UI.toast('Nama sudah dipakai.', 'warn');
+    };
+
     UI.$('#btnAboutSrs').onclick = function () {
       UI.modal('<div class="concept"><h2>Cara kerja repetisi (SRS)</h2>' +
         '<p>Teknik ini disebut <b>spaced repetition</b> — mengulang tepat sebelum kamu hampir lupa. Makin kamu menguasai sebuah skill, makin jarang ia muncul kembali; begitu mulai memudar, ia dijemput pulang.</p>' +
@@ -7324,12 +7439,12 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       '<div class="panel"><h3>Export progress (.fgy terenkripsi)</h3>' +
       '<p class="muted small">File khusus Vista Forgy — AES-256-GCM + PBKDF2 (250.000 iterasi). Password tidak disimpan; lupa password = file tidak bisa dibuka.</p>' +
       (cryptoOk ? '' : '<div class="warn small">' + ic('alert') + ' Web Crypto tidak tersedia di konteks ini — export terenkripsi dinonaktifkan. Gunakan backup plain (dengan risikonya).</div>') +
-      '<div class="field"><span>Password file</span><input id="expPw" type="password" autocomplete="new-password"></div>' +
-      '<div class="field"><span>Ulangi password</span><input id="expPw2" type="password" autocomplete="new-password"></div>' +
+      '<label class="field"><span>Password file</span><input id="expPw" type="password" autocomplete="new-password" aria-label="Password file export"></label>' +
+      '<label class="field"><span>Ulangi password</span><input id="expPw2" type="password" autocomplete="new-password" aria-label="Ulangi password export"></label>' +
       '<button class="btn primary" id="btnExport"' + (cryptoOk ? '' : ' disabled') + '>' + ic('download') + ' Download .fgy</button></div>' +
       '<div class="panel"><h3>Import progress</h3>' +
-      '<div class="field"><span>File .fgy</span><input id="impFile" type="file" accept=".fgy"></div>' +
-      '<div class="field"><span>Password file</span><input id="impPw" type="password" autocomplete="off"></div>' +
+      '<label class="field"><span>File .fgy</span><input id="impFile" type="file" accept=".fgy" aria-label="Pilih file .fgy"></label>' +
+      '<label class="field"><span>Password file</span><input id="impPw" type="password" autocomplete="off" aria-label="Password file import"></label>' +
       '<div class="btn-row"><button class="btn ghost" id="btnMerge">' + ic('upload') + ' Merge (gabung)</button><button class="btn ghost" id="btnReplace">Replace (timpa)</button></div>' +
       '<div id="impPreview"></div></div>' +
       '<div class="panel"><h3>Backup plain (tidak terenkripsi)</h3><p class="muted small">JSON mentah — siapa pun yang punya file bisa membacanya.</p>' +

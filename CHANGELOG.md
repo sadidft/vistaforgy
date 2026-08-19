@@ -2,6 +2,17 @@
 
 Format subversi mengikuti aturan pemilik produk: `1.x.y` — tidak pernah naik ke v2; setelah 1.9 langsung 1.10 (hingga 1.999). Update kecil = subversi, bukan lompatan minor.
 
+## v1.6.5 — Multi-profil satu device
+- Panel "Profil" di Setelan: buat/pindah/hapus profil; progress tiap profil terpisah penuh di slot lokal sendiri (`vf.p:<nama>`); profil aktif tetap di `vf.save` (kompatibel penuh dengan export `.fgy`).
+- FIX race tulis saat pindah profil (`VF.persist()` setelah `switchProfile` sempat menimpa slot baru dengan save in-memory basi — tertangkap E2E baru lalu diperbaiki).
+- E2E +4 test alur profil (buat → aktif → streak bersih → kembali → progress utuh): Chromium 29/29 & Firefox 29/29.
+
+## v1.6.4 — QA penuh: a11y, Lighthouse, CI
+- **Audit axe-core** (`tests/a11y.js`, 6 layar): ditemukan & diperbaiki — input password Data tanpa label, slider volume & slider LP tanpa nama aksesibel, tombol toggle tanpa aria-pressed/label, listbox dropdown tanpa nama, `<label>` tanpa kontrol, h3 melompati h2 → kini **NOL pelanggaran serious/critical**.
+- **Lighthouse** (server lokal, headless): Performance **93** · Accessibility **100** · Best Practices **100** · SEO **100** (semua melebihi budget spec: ≥90/≥95/≥95/≥90).
+- **CI GitHub Actions final**: unit + audit statis + build + E2E + recon browser + visual matrix + a11y, plus job **WebKit eksperimental** (continue-on-error; WebKit tak bisa jalan di sandbox Debian 13 — lib ICU66/ffi7 — tapi di runner ubuntu resmi GitHub tersedia).
+- Workflow resmi terpush setelah PAT diberi scope `workflow`.
+
 ## v1.6.3 — Bug recon menyeluruh + non-UI/UX
 - **BUG (dilaporkan pemakai)**: soal kalibrasi merujuk visual ("Lihat grafik…") tetapi jalur render kalibrasi tidak pernah memanggil `UI.renderVisual` → soal tidak bisa dijawab. FIX: kalibrasi kini merender visual + LaTeX + animasi (queue/LP) di setiap soalnya.
 - **BUG (ditemukan recon statis)**: `inv.discount` bisa gagal generate 25× (konstrain integer Q terlalu ketat, mirip kasus EOQ v1.0). FIX: tabel `DISC_COMBOS` precomputed.

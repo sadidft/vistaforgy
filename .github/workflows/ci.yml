@@ -73,3 +73,39 @@ jobs:
         run: node tests/audit-browser.js
       - name: Visual QA matrix (7 viewport)
         run: node tests/visual.js
+      - name: Audit aksesibilitas (axe-core)
+        env:
+          AXE_PATH: /usr/lib/node_modules/axe-core/axe.min.js
+        run: |
+          npm i --prefix /usr/lib/node_modules axe-core@4.10.2 >/dev/null 2>&1 || npm i -g axe-core@4.10.2
+          node tests/a11y.js
+
+  webkit-experimental:
+    name: E2E WebKit (Safari engine) — eksperimental
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.1-noble
+    env:
+      PW_PATH: /usr/lib/node_modules/playwright-core
+      PW_BROWSER: webkit
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i --prefix /usr/lib/node_modules playwright-core@1.49.1 >/dev/null 2>&1 || npm i -g playwright-core@1.49.1
+      - name: Build standalone
+        run: |
+          python3 - <<'PY'
+          import re, base64
+          html = open('index.html', encoding='utf-8').read()
+          js = re.findall(r'<script src="(js/[^"]+)"></script>', html)
+          inline = []
+          for f in js:
+              inline.append('<!-- %s -->\n<script>\n%s\n</script>' % (f, open(f, encoding='utf-8').read()))
+          block = '\n'.join(inline) + '\n'
+          out = re.sub(r'<!-- Vista Forgy[^>]*-->\n(?:\s*<script src="js/[^"]+"></script>\n?)+', lambda m: block, html)
+          out = out.replace('<link rel="manifest" href="manifest.webmanifest">\n', '')
+          logo = base64.b64encode(open('assets/vista-192.png', 'rb').read()).decode()
+          out = out.replace('assets/vista-192.png', 'data:image/png;base64,' + logo)
+          open('VistaForgy-standalone.html', 'w', encoding='utf-8').write(out)
+          PY
+      - run: node tests/e2e.js

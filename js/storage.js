@@ -124,6 +124,56 @@
     } catch (e) {}
   };
 
+  /* ---------- multi-profil (v1.6.5) ----------
+     vf.active  = nama profil aktif; vf.save = data AKTIF (kompatibilitas penuh dgn .fgy).
+     vf.profiles = indeks; vf.p:<nama> = slot per profil. */
+  STORE.profileIndex = function () {
+    try { return JSON.parse(lsGet('vf.profiles') || '[]'); } catch (e) { return []; }
+  };
+  STORE.activeProfile = function () { return lsGet('vf.active') || 'utama'; };
+  STORE.ensureDefaultProfile = function () {
+    if (!lsGet('vf.active')) {
+      lsSet('vf.active', 'utama');
+      var idx = STORE.profileIndex();
+      if (!idx.some(function (p) { return p.name === 'utama'; })) {
+        idx.push({ name: 'utama', createdAt: Date.now() });
+        lsSet('vf.profiles', JSON.stringify(idx));
+      }
+    }
+  };
+  STORE.saveCurrentToSlot = function () {
+    var raw = lsGet(KEY);
+    if (raw) lsSet('vf.p:' + STORE.activeProfile(), raw);
+    var idx = STORE.profileIndex();
+    var name = STORE.activeProfile();
+    if (!idx.some(function (p) { return p.name === name; })) { idx.push({ name: name, createdAt: Date.now() }); lsSet('vf.profiles', JSON.stringify(idx)); }
+  };
+  STORE.switchProfile = function (name) {
+    var slot = lsGet('vf.p:' + name);
+    if (!slot) return false;
+    STORE.saveCurrentToSlot();
+    lsSet(KEY, slot);
+    lsSet('vf.active', name);
+    return true;
+  };
+  STORE.createProfile = function (name, freshSave) {
+    if (!name || lsGet('vf.p:' + name)) return false;
+    STORE.saveCurrentToSlot();
+    lsSet('vf.p:' + name, JSON.stringify(freshSave));
+    lsSet(KEY, JSON.stringify(freshSave));
+    lsSet('vf.active', name);
+    var idx = STORE.profileIndex();
+    idx.push({ name: name, createdAt: Date.now() });
+    lsSet('vf.profiles', JSON.stringify(idx));
+    return true;
+  };
+  STORE.deleteProfile = function (name) {
+    if (name === STORE.activeProfile()) return false;
+    lsDel('vf.p:' + name);
+    lsSet('vf.profiles', JSON.stringify(STORE.profileIndex().filter(function (p) { return p.name !== name; })));
+    return true;
+  };
+
   STORE.usage = function () {
     var raw = lsGet(KEY) || '';
     return { bytes: raw.length, kb: Math.round(raw.length / 102.4) / 10, limitKb: 5120 };
