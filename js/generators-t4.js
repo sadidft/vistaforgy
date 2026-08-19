@@ -981,15 +981,25 @@
   });
 
   /* ===== T4: EOQ QUANTITY DISCOUNT ===== */
+  var DISC_COMBOS = (function () {
+    var out = [];
+    [1200, 2400, 3600, 4800].forEach(function (D) {
+      [30, 45, 50, 60].forEach(function (S) {
+        [5, 6, 10, 12].forEach(function (H) {
+          var q = Math.sqrt(2 * D * S / H);
+          if (Math.abs(q - Math.round(q)) < 1e-9) out.push({ D: D, S: S, H: H, q: Math.round(q) });
+        });
+      });
+    });
+    return out;
+  })();
   E.registerFamily({
     familyId: 'disc',
     make: function (rng, node, knobs) {
-      var D = rng.pick([1200, 2400, 3600, 4800]);
-      var S = rng.pick([30, 45, 50, 60]);
-      var H = rng.pick([5, 6, 10, 12]);
-      var q = Math.sqrt(2 * D * S / H);
-      if (Math.abs(q - Math.round(q)) > 1e-9) return null;
-      q = Math.round(q);
+      if (!DISC_COMBOS.length) return null;
+      var comb = rng.pick(DISC_COMBOS);
+      var D = comb.D, S = comb.S, H = comb.H;
+      var q = comb.q;
       var price = rng.pick([20, 25, 40, 50]); // ribu/unit
       var disc = rng.pick([0.05, 0.1]);
       var Qd = Math.round(q * rng.pick([1.5, 2]));

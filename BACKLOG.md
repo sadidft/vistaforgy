@@ -1,7 +1,7 @@
 # 📋 VISTA FORGY — BACKLOG RESMI
 
 > Dokumen jujur apa yang sudah/belum dibangun. Diperbarui per versi.
-> **v1.6 — 19 Agustus 2026 (repo: github.com/sadidft/vistaforgy)**
+> **v1.6.3 — 19 Agustus 2026 (repo: github.com/sadidft/vistaforgy)**
 
 ## ✅ SELESAI (v1.1)
 
@@ -19,6 +19,12 @@
 | **v1.4 baru** | **Rebrand Vista Academy**: seluruh token warna (canvas/panel/mint/amber/blue/danger), KOA SVG + mesh 3D, pabrik isometrik, heatmap, sertifikat, ikon SVG+PNG, manifest · **Visual QA matrix 32/32** (7 viewport, zero overflow, zero error, tangkapan di `design/`) — sekalian membetulkan bug overflow nyata 23–27px di Peta Skill layar <520px |
 | **v1.3 baru** | **KOA 3D** software-rendered (drag-rotate, painter’s algorithm, fallback SVG) · **E2E Playwright headless Chromium: 18/18, NOL error JS** · kalibrasi onboarding (Elo awal) · verifikasi independen simpleks 200× |
 | **Test** | **13.992 assertion engine 0 gagal + E2E 20/20 + Visual 32/32** | (`node tests/run.js`) — 121 generator × validasi, scheduler, gerbang, kripto roundtrip + tamper, merge, storage |
+
+## 🆕 v1.6.3 — BUG RECON PERMANEN + NON-UI/UX (selesai)
+- **FIX (laporan pemakai)**: kalibrasi menampilkan soal ber-visual tanpa visualnya → jalur kalibrasi kini full-render (visual, LaTeX, animasi).
+- **FIX (temuan recon)**: `inv.discount` bisa gagal generate 25× → precomputed combos.
+- **Suite recon permanen**: `tests/audit.js` (statis: 142 node × 60 seed = 8.520 soal; 7 kelas deteksi; parser angka Indonesia lengkap) + `tests/audit-browser.js` (browser nyata: 142 node dirender & dijawab, kalibrasi end-to-end; 160/160). Terbukti menangkap 2 bug yang lolos QA sebelumnya.
+- Non-UI/UX: `CHANGELOG.md` lengkap retroaktif, CI GitHub Actions (unit+audit+build+E2E+visual dalam kontainer Playwright), E2E lintas-browser (Chromium & Firefox 25/25).
 
 ## 🆕 v1.6 — FRONT-END SWEEP (selesai)
 Bugfix nyata dari feedback pemakai: (1) **kalibrasi macet 1/6** — node format numeric bikin render berikutnya throw senyap → daftar node kalibrasi kini MC-only + guard skip-anti-macet; (2) **panel Setelan & Data nempel dempetan** — panel di luar .bento tidak pernah punya gap sejak v1.0 → `.screen>.panel+.panel{margin-top:14px}`; (3) jarak tombol↔catatan onboarding. Sweep: tombol ✕ di semua modal, transisi halaman, legend heatmap, focus-ring mint konsisten (a11y), scrollbar gelap halus, haptic keypad (Vibration API), runner header tahan layar sempit, toggle-row & dropdown responsif, pesan pencarian "tidak ketemu", kv-row dengan tombol dirapikan. **E2E +5 regression test (25/25), Visual 32/32.**
@@ -38,8 +44,8 @@ Logo resmi Vista Academy (disedot dari vistaacademy.pages.dev, dipoles: ring min
 | 1 | Konten steps tambahan: Gauss 3×3 full, Cramer 2×2/3×3, integral parsial & fraksi parsial, M/M/s umum (s>2), simpleks iterasi ke-2 + interpretasi slack | mudah — pola family & format steps sudah ada |
 | 2 | Tabel distribusi lebih granular (z per 0,01; t satu sisi; binomial kumulatif) — sekarang versi ringkas | mudah — data saja |
 | 3 | Histori sesi per-item (bukan agregat) + statistik per jam-belajar | sedang |
-| 4 | E2E lintas-browser (WebKit/Firefox) + audit aksibilitas axe + Lighthouse CI formal | sedang — butuh deps tambahan |
-| 5 | CI otomatis (GitHub Actions: unit + E2E tiap commit) & changelog otomatis | sedang — butuh repo GitHub |
+| 4 | E2E WebKit (Safari-engine) + audit axe + Lighthouse CI formal | Firefox & Chromium ✅ (v1.6.3); WebKit tersisa |
+| 5 | ~~CI~~ ✅ v1.6.3 (`.github/workflows/ci.yml`) · ~~changelog~~ ✅ `CHANGELOG.md` manual-detail |
 | 6 | Mode multi-profil satu device (switch akun lokal) | opsional |
 
 ## 🎯 Filosofi backlog

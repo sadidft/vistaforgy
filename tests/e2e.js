@@ -1,7 +1,8 @@
 /* Vista Forgy — E2E test (browser nyata, headless chromium via playwright-core)
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/e2e.js */
 'use strict';
-const { chromium } = require('/home/user/e2e-work/node_modules/playwright-core');
+const pw = require(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core');
+const BROWSER = process.env.PW_BROWSER === 'firefox' ? pw.firefox : pw.chromium;
 const fs = require('fs');
 const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
 
@@ -9,12 +10,13 @@ let pass = 0, fail = 0;
 function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } else { fail++; console.log('  ✗ ' + name); } }
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await BROWSER.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); // ukuran iPhone
   const errors = [];
   page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message));
   page.on('console', m => {
-    if (m.type() === 'error' && !/favicon|manifest|Failed to load resource|net::ERR/.test(m.text())) errors.push('CONSOLE: ' + m.text());
+    // 'Navigated away from page' = artefak internal Firefox saat hash-nav cepat (bukan error app)
+    if (m.type() === 'error' && !/favicon|manifest|Failed to load resource|net::ERR|InvalidStateError.*Navigated away/.test(m.text())) errors.push('CONSOLE: ' + m.text());
   });
 
   console.log('== VISTA FORGY E2E (mobile 390px) ==');

@@ -4402,15 +4402,25 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
   });
 
   /* ===== T4: EOQ QUANTITY DISCOUNT ===== */
+  var DISC_COMBOS = (function () {
+    var out = [];
+    [1200, 2400, 3600, 4800].forEach(function (D) {
+      [30, 45, 50, 60].forEach(function (S) {
+        [5, 6, 10, 12].forEach(function (H) {
+          var q = Math.sqrt(2 * D * S / H);
+          if (Math.abs(q - Math.round(q)) < 1e-9) out.push({ D: D, S: S, H: H, q: Math.round(q) });
+        });
+      });
+    });
+    return out;
+  })();
   E.registerFamily({
     familyId: 'disc',
     make: function (rng, node, knobs) {
-      var D = rng.pick([1200, 2400, 3600, 4800]);
-      var S = rng.pick([30, 45, 50, 60]);
-      var H = rng.pick([5, 6, 10, 12]);
-      var q = Math.sqrt(2 * D * S / H);
-      if (Math.abs(q - Math.round(q)) > 1e-9) return null;
-      q = Math.round(q);
+      if (!DISC_COMBOS.length) return null;
+      var comb = rng.pick(DISC_COMBOS);
+      var D = comb.D, S = comb.S, H = comb.H;
+      var q = comb.q;
       var price = rng.pick([20, 25, 40, 50]); // ribu/unit
       var disc = rng.pick([0.05, 0.1]);
       var Qd = Math.round(q * rng.pick([1.5, 2]));
@@ -7467,11 +7477,14 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
         var idxs = q.choices.map(function (c, i) { return i; });
         for (var i = idxs.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idxs[i]; idxs[i] = idxs[j]; idxs[j] = t; }
         box.innerHTML = '<div class="qcard" style="margin-top:10px"><div class="q-meta">Kalibrasi ' + (ci + 1) + '/' + CAL_NODES.length + '</div>' +
+          UI.renderVisual(q.visual) +
           '<div class="q-prompt">' + esc(q.promptText) + '</div>' + (q.promptLatex ? '<div class="q-latex">' + UI.latex(q.promptLatex) + '</div>' : '') +
           '<div class="mc">' + idxs.map(function (cix, pos) {
             var c = q.choices[cix];
             return '<button class="mc-opt calib-opt" data-ok="' + (c.correct ? 1 : 0) + '"><span class="mc-key">' + (pos + 1) + '</span><span class="mc-lab">' + esc(c.label) + '</span></button>';
           }).join('') + '</div></div>';
+        UI.activateQueue(box);
+        UI.activateLp(box);
         UI.$$('.calib-opt', box).forEach(function (b) {
           b.onclick = function () {
             var okc = b.getAttribute('data-ok') === '1';

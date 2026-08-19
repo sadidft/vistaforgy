@@ -617,11 +617,14 @@
         var idxs = q.choices.map(function (c, i) { return i; });
         for (var i = idxs.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idxs[i]; idxs[i] = idxs[j]; idxs[j] = t; }
         box.innerHTML = '<div class="qcard" style="margin-top:10px"><div class="q-meta">Kalibrasi ' + (ci + 1) + '/' + CAL_NODES.length + '</div>' +
+          UI.renderVisual(q.visual) +
           '<div class="q-prompt">' + esc(q.promptText) + '</div>' + (q.promptLatex ? '<div class="q-latex">' + UI.latex(q.promptLatex) + '</div>' : '') +
           '<div class="mc">' + idxs.map(function (cix, pos) {
             var c = q.choices[cix];
             return '<button class="mc-opt calib-opt" data-ok="' + (c.correct ? 1 : 0) + '"><span class="mc-key">' + (pos + 1) + '</span><span class="mc-lab">' + esc(c.label) + '</span></button>';
           }).join('') + '</div></div>';
+        UI.activateQueue(box);
+        UI.activateLp(box);
         UI.$$('.calib-opt', box).forEach(function (b) {
           b.onclick = function () {
             var okc = b.getAttribute('data-ok') === '1';

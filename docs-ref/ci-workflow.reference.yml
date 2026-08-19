@@ -1,0 +1,75 @@
+name: CI Vista Forgy
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit-audit:
+    name: Unit + Audit statis + Build standalone
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Syntax check semua modul
+        run: for f in js/*.js; do node --check "$f"; done
+      - name: Unit & property test (engine/scheduler/progression/crypto)
+        run: node tests/run.js
+      - name: Bug recon statis (semua node × 60 seed)
+        run: node tests/audit.js
+      - name: Build single-file standalone
+        run: |
+          python3 - <<'PY'
+          import re, base64
+          html = open('index.html', encoding='utf-8').read()
+          js = re.findall(r'<script src="(js/[^"]+)"></script>', html)
+          inline = []
+          for f in js:
+              inline.append('<!-- %s -->\n<script>\n%s\n</script>' % (f, open(f, encoding='utf-8').read()))
+          block = '\n'.join(inline) + '\n'
+          out = re.sub(r'<!-- Vista Forgy[^>]*-->\n(?:\s*<script src="js/[^"]+"></script>\n?)+', lambda m: block, html)
+          out = out.replace('<link rel="manifest" href="manifest.webmanifest">\n', '')
+          logo = base64.b64encode(open('assets/vista-192.png', 'rb').read()).decode()
+          out = out.replace('assets/vista-192.png', 'data:image/png;base64,' + logo)
+          open('VistaForgy-standalone.html', 'w', encoding='utf-8').write(out)
+          print('standalone:', len(out), 'chars')
+          PY
+
+  e2e:
+    name: E2E + Recon browser + Visual matrix (Chromium)
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.1-noble
+    env:
+      PW_PATH: /usr/lib/node_modules/playwright-core
+    steps:
+      - uses: actions/checkout@v4
+      - name: Siapkan playwright-core
+        run: |
+          mkdir -p /usr/lib/node_modules && cd /usr/lib/node_modules
+          npm i --prefix . playwright-core@1.49.1 >/dev/null 2>&1 || npm i -g playwright-core@1.49.1
+      - name: Build standalone
+        run: node -e "console.log('build di job unit sudah menghasilkan file; job ini checkout ulang — build cepat di sini')" 
+      - name: Build standalone (ulang untuk job ini)
+        run: |
+          python3 - <<'PY'
+          import re, base64
+          html = open('index.html', encoding='utf-8').read()
+          js = re.findall(r'<script src="(js/[^"]+)"></script>', html)
+          inline = []
+          for f in js:
+              inline.append('<!-- %s -->\n<script>\n%s\n</script>' % (f, open(f, encoding='utf-8').read()))
+          block = '\n'.join(inline) + '\n'
+          out = re.sub(r'<!-- Vista Forgy[^>]*-->\n(?:\s*<script src="js/[^"]+"></script>\n?)+', lambda m: block, html)
+          out = out.replace('<link rel="manifest" href="manifest.webmanifest">\n', '')
+          logo = base64.b64encode(open('assets/vista-192.png', 'rb').read()).decode()
+          out = out.replace('assets/vista-192.png', 'data:image/png;base64,' + logo)
+          open('VistaForgy-standalone.html', 'w', encoding='utf-8').write(out)
+          PY
+      - name: E2E alur penuh
+        run: node tests/e2e.js
+      - name: Bug recon browser (142 node + kalibrasi)
+        run: node tests/audit-browser.js
+      - name: Visual QA matrix (7 viewport)
+        run: node tests/visual.js

@@ -1,5 +1,5 @@
 /* Vista Forgy — service worker sederhana: cache-first, offline penuh */
-var CACHE = 'vista-forgy-v1-6';
+var CACHE = 'vista-forgy-v1-6-3';
 var ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png',
   './js/rng.js', './js/engine.js', './js/generators-core.js', './js/generators-mid.js',

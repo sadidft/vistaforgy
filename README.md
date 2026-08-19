@@ -1,7 +1,8 @@
-# 🔩 Vista Forgy — Gym Otak (v1.6)
+# 🔩 Vista Forgy — Gym Otak (v1.6.3)
 
 > **Gym untuk otakmu — logika & matematika industri sampai di luar kepala.**
 >
+> 🆕 **v1.6.3 — Bug recon permanen + non-UI/UX**: FIX soal kalibrasi tanpa visual (kini jalur kalibrasi merender visual+LaTeX+animasi), FIX `inv.discount` gagal-generate, **suite recon ganda**: `tests/audit.js` (statis 8.520 soal) + `tests/audit-browser.js` (render semua 142 node di browser nyata, 160/160) — kelas bug "soal butuh visual tapi tak tampil" kini MUSTAHIL lolos senyap. Plus: CHANGELOG.md lengkap, CI GitHub Actions, **E2E lintas-browser: Chromium 25/25 & Firefox 25/25**.
 > 🆕 **v1.6 — Front-end sweep**: FIX kalibrasi macet di soal 1/6 (node numeric kini diganti node MC + guard anti-macet), FIX gap panel Setelan/Data (dulu nempel 0px → 14px), jarak onboarding dirapikan, modal punya tombol ✕, transisi halaman halus, legend heatmap, focus-ring mint konsisten, scrollbar gelap, haptic keypad, runner header tahan layar 320px, toggle-row responsif, pesan "tidak ketemu" di pencarian Peta. QA: E2E 25/25 (5 regression test baru) + Visual 32/32.
 > 🆕 **v1.5.1–v1.5.3**: Gauss 3×3 full (steps), Cramer (steps), integral parsial & fraksi parsial (steps), M/M/s umum, simpleks 2 iterasi, **tabel z granular per 0,01 (Φ eksak) + t satu-sisi + binomial kumulatif eksak**, **riwayat sesi per-item + "Jam Emas"** (akurasi per jam belajar), **dropdown Setelan custom dipoles** (animasi + keyboard), audit UX belajar: anti-bypass zeno terkunci, timer ring fix, hint keyboard MC.
 > 🆕 **v1.5**: logo resmi Vista Academy di hero (dipoles: glow mint + float), **KOA 3D dihapus**, **Topologi Pengetahuan 3D** interaktif (drag/zoom/klik simpul) di Beranda + landing + kartu konsep, **bugfix Stats desktop** (grid span), pencarian Peta Skill, export CSV statistik, pengingat backup 14 hari.
@@ -25,7 +26,7 @@ Semua progress disimpan di `localStorage` perangkat. Export/import via file tere
 node tests/run.js    # engine: 13.620 assertion (142 generator × validasi, scheduler, gerbang, kripto)
 ```
 
-E2E browser nyata (headless Chromium): `tests/e2e.js` (25/25) · **Visual QA matrix `tests/visual.js` (32/32)**: 7 viewport × 4 layar tanpa overflow horizontal, nol error JS, screenshot di `design/` — onboarding → sesi penuh (MC/numeric/steps) → streak → 4 layar → export `.fgy` + dekripsi roundtrip Node → modal konsep → pabrik → **nol error JS**. (Butuh `playwright-core`; sandbox workspace: `/home/user/e2e-work`.)
+E2E browser nyata **lintas-browser**: `tests/e2e.js` (Chromium 25/25 & Firefox 25/25) + `tests/audit-browser.js` (recon 142 node, 160/160) · **Visual QA matrix `tests/visual.js` (32/32)**: 7 viewport × 4 layar tanpa overflow horizontal, nol error JS, screenshot di `design/` — onboarding → sesi penuh (MC/numeric/steps) → streak → 4 layar → export `.fgy` + dekripsi roundtrip Node → modal konsep → pabrik → **nol error JS**. (Butuh `playwright-core`; sandbox workspace: `/home/user/e2e-work`.)
 
 **13.992 assertion engine** + **E2E browser nyata 18/18** (headless Chromium 390px): onboarding → sesi penuh → semua layar → export `.fgy` + dekripsi roundtrip → **NOL error JS**. Generator (**136 node**) diuji 30× (validitas MC/numeric, pembahasan, determinisme), variasi anti-template, scheduler FSRS-lite, gerbang tier, ujian promosi + cooldown 48 jam, roundtrip kripto + tamper-detection, merge, storage fallback.
 
