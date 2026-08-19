@@ -118,7 +118,7 @@
         '<div class="panel p-heat"><div class="p-head">' + ic('stats') + '<span>Konsistensi 12 minggu</span></div>' + UI.heatmap(save.stats.dailyLog, 12) + '</div>' +
         '<div class="panel p-factory"><div class="p-head">' + ic('gear') + '<span>Pabrik Otak</span></div><div class="factory-wrap"><canvas class="factory-cv" id="factoryCv"></canvas></div></div>' +
         '<div class="panel p-topo"><div class="p-head">' + ic('map') + '<span>Topologi Pengetahuan 3D</span></div>' +
-        '<p class="muted small">Seluruh ' + E.allNodes().length + ' skill sebagai jaringan 3D — hubungan prasyarat antar materi terlihat utuh. Drag untuk memutar · scroll untuk zoom · klik simpul untuk detail.</p>' +
+        '<p class="muted small">Seluruh ' + E.allNodes().length + ' skill sebagai jaringan 3D — hubungan prasyarat antar materi terlihat utuh. Drag = putar · scroll = zoom · Shift+drag / klik-kanan = geser (pan) · klik = detail · dobel-klik = pusatkan.</p>' +
         '<div id="topoHost"></div></div>' +
       '</div>' +
       (save.stats.lastExportTs && (Date.now() - save.stats.lastExportTs > 14 * 86400000) && STORE.persistent() ?
@@ -615,19 +615,19 @@
   UI.route('onboarding', function () {
     var html = '<section class="screen onboarding">' +
       '<div class="ob-hero"><div class="logo-ring big"><img src="assets/vista-192.png" alt="Vista Academy" draggable="false"></div>' +
-      '<h1>Vista Forgy <span class="muted small">× Vista Academy</span></h1><p class="tagline">Gym untuk otakmu — logika & matematika industri sampai <b>di luar kepala</b>.</p>' +
+      '<h1>Vista Forgy <span class="muted small">× Vista Academy</span></h1><p class="tagline">Pelatihan repetisi harian: logika & matematika teknik industri.</p>' +
       '<div id="obTopo"></div></div>' +
       '<div class="ob-cards">' +
-      '<div class="ob-card">' + ic('zap') + '<b>Bukan kursus online</b><span>Tiap hari angkat beban: soal drill, bukan video panjang.</span></div>' +
-      '<div class="ob-card">' + ic('gear') + '<b>Soal tidak pernah berulang</b><span>Digenerate oleh mesin — angka, struktur, dan konteksnya selalu baru.</span></div>' +
-      '<div class="ob-card">' + ic('shield') + '<b>Progressmu milikmu</b><span>Semua data di perangkatmu. Bisa dibawa dengan file terenkripsi.</span></div></div>' +
+      '<div class="ob-card">' + ic('zap') + '<b>Format</b><span>Sesi drill ± ' + '25 menit: pemanasan → review terjadwal → materi baru.</span></div>' +
+      '<div class="ob-card">' + ic('gear') + '<b>Bank soal</b><span>Digenerate otomatis — angka, struktur, dan konteks berubah setiap kemunculan.</span></div>' +
+      '<div class="ob-card">' + ic('shield') + '<b>Data</b><span>Tersimpan lokal di perangkat; export/import via file terenkripsi (.fgy).</span></div></div>' +
       '<div class="panel ob-form">' +
       '<label class="field"><span>Nama panggilan (untuk salam & sertifikat)</span><input id="obNama" type="text" maxlength="20" placeholder="mis. Arif"></label>' +
       '<label class="field"><span>Track</span><select id="obTrack"><option value="ti">Teknik Industri (lengkap)</option><option value="both">TI + Universal (non-TI friendly)</option></select></label>' +
       '<label class="field"><span>Target harian</span><select id="obGoal"><option value="15">15 menit (santai)</option><option value="25" selected>25 menit (serius)</option><option value="40">40 menit (gaspol)</option></select></label>' +
       '<div class="btn-row"><button class="btn primary big" id="obGo" style="flex:1">' + ic('play') + ' Mulai Tempa Hari Ini</button>' +
       '<button class="btn ghost" id="obCalib">Kalibrasi (opsional)</button></div>' +
-      '<p class="muted small">Dengan mulai, kamu setuju otakmu akan disesakkan dengan cara yang sehat (desirable difficulty).</p>' +
+      '<p class="muted small">Latihan memakai pengulangan berjarak (spaced repetition) — materi dijadwalkan ulang otomatis sesuai kemampuanmu.</p>' +
       '<div id="calibBox"></div></div></section>';
     UI.$('#app').innerHTML = html;
     var obTopo = UI.$('#obTopo');

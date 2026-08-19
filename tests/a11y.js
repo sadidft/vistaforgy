@@ -2,11 +2,12 @@
    Memeriksa 5 layar utama + runner: pelanggaran serious/critical harus NOL.
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/a11y.js */
 'use strict';
-const pw = require(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core');
+const path0 = require('path');
+const pw = require(path0.resolve(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core'));
 const fs = require('fs');
-const axeSrc = fs.readFileSync(process.env.AXE_PATH || '/home/user/e2e-work/node_modules/axe-core/axe.min.js', 'utf8');
-const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
-const seed = require('/home/user/vista-forgy/tests/visual-seed.js')();
+const axeSrc = fs.readFileSync(path0.resolve(process.env.AXE_PATH || '/home/user/e2e-work/node_modules/axe-core/axe.min.js'), 'utf8');
+const APP = 'file://' + path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'VistaForgy-standalone.html');
+const seed = require(path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'tests/visual-seed.js'))();
 
 let pass = 0, fail = 0;
 const ok = (c, n) => { if (c) { pass++; console.log('  ✓ ' + n); } else { fail++; console.log('  ✗ ' + n); } };

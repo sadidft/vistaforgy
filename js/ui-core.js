@@ -130,7 +130,15 @@
       open = o;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       host.classList.toggle('open', open);
-      if (open) { hi = -1; }
+      if (open) {
+        hi = -1;
+        // popover flip: kalau ruang di bawah sempit (kartu pendek / dekat dasar layar), buka ke ATAS
+        try {
+          var r = btn.getBoundingClientRect();
+          var spaceBelow = window.innerHeight - r.bottom;
+          host.classList.toggle('up', spaceBelow < 190);
+        } catch (e) {}
+      }
     }
     function choose(v) {
       value = v;

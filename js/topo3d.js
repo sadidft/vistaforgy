@@ -96,8 +96,9 @@
     var graph = buildGraph(save, opts.focus || null);
     var yaw = 0.7, pitch = -0.42, zoom = opts.focus ? 1.35 : 1.0;
     var vyaw = opts.focus ? 0.0025 : 0.0042;
-    var dragging = false, moved = 0, lastX = 0, lastY = 0;
+    var dragging = false, panning = false, moved = 0, lastX = 0, lastY = 0;
     var hover = null, destroyed = false, raf = null;
+    var panX = 0, panY = 0; // geser pusat pandang (menghapus blind spot orbit)
 
     var focusPt = null;
     if (opts.focus && graph.map[opts.focus]) focusPt = graph.map[opts.focus];
@@ -111,7 +112,7 @@
       var z2 = y * Math.sin(pitch) + zz * Math.cos(pitch);
       var FOC = 420;
       var s = (FOC / (FOC - z2 * 1.35)) * zoom;
-      return { x: (cv.width / 2) + xz * s, y: (cv.height / 2) - yz * s, s: s, z: z2 };
+      return { x: (cv.width / 2) + panX + xz * s, y: (cv.height / 2) + panY - yz * s, s: s, z: z2 };
     }
 
     function draw() {
@@ -198,12 +199,18 @@
       var t = ev.touches ? ev.touches[0] : ev;
       return { x: (t.clientX - r.left) * (cv.width / r.width), y: (t.clientY - r.top) * (cv.height / r.height) };
     }
-    function down(ev) { dragging = true; moved = 0; var p = pos(ev); lastX = p.x; lastY = p.y; }
+    function down(ev) { dragging = true; panning = !!(ev.shiftKey || (ev.button === 2)); moved = 0; var p = pos(ev); lastX = p.x; lastY = p.y; }
     function move(ev) {
       var p = pos(ev);
       if (dragging) {
-        yaw += (p.x - lastX) * 0.008 / dpr;
-        pitch = Math.max(-1.35, Math.min(1.0, pitch + (p.y - lastY) * 0.006 / dpr));
+        if (panning) {
+          panX += (p.x - lastX); panY += (p.y - lastY);
+          panX = Math.max(-cv.width, Math.min(cv.width, panX));
+          panY = Math.max(-cv.height, Math.min(cv.height, panY));
+        } else {
+          yaw += (p.x - lastX) * 0.008 / dpr;
+          pitch = Math.max(-1.35, Math.min(1.0, pitch + (p.y - lastY) * 0.006 / dpr));
+        }
         moved += Math.abs(p.x - lastX) + Math.abs(p.y - lastY);
         lastX = p.x; lastY = p.y;
         if (VF.reduceMotion && VF.reduceMotion()) draw();
@@ -212,6 +219,15 @@
         cv.style.cursor = hover ? 'pointer' : 'grab';
         if (VF.reduceMotion && VF.reduceMotion()) draw();
       }
+    }
+    function dbl(ev) {
+      var p = pos(ev);
+      var hit = pick(p.x, p.y);
+      if (hit) {
+        focusPt = hit;             // pusatkan ke simpul yang diklik dobel
+        panX = 0; panY = 0;
+      } else { focusPt = null; panX = 0; panY = 0; zoom = opts.focus ? 1.35 : 1.0; }
+      if (VF.reduceMotion && VF.reduceMotion()) draw();
     }
     function up(ev) {
       if (dragging && moved < 6 && hover && opts.clickToOpen) {
@@ -233,6 +249,8 @@
       cv.addEventListener('touchmove', move, { passive: false });
       cv.addEventListener('touchend', up);
       cv.addEventListener('wheel', wheel, { passive: false });
+      cv.addEventListener('dblclick', dbl);
+      cv.addEventListener('contextmenu', function (e) { e.preventDefault(); });
       cv.addEventListener('mouseleave', function () { hover = null; });
     } catch (e) {}
 

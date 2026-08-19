@@ -6,9 +6,11 @@
    B3. Jalur kalibrasi onboarding: 6 soal maju + visual ikut dirender.
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/audit-browser.js */
 'use strict';
-const { chromium } = require(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core');
+const path0 = require('path');
+const pw = require(path0.resolve(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core'));
+const chromium = pw.chromium;
 const fs = require('fs');
-const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
+const APP = 'file://' + path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'VistaForgy-standalone.html');
 
 let pass = 0, fail = 0;
 const findings = [];

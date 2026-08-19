@@ -53,7 +53,7 @@ nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justif
 @media(min-width:1024px){.bento{grid-template-columns:repeat(12,1fr)}.p-main{grid-column:span 7}.p-streak,.p-sharp{grid-column:span 5}.p-gate,.p-heat,.p-factory{grid-column:span 6}
  .panel:is(.p-main){grid-row:span 1}}
 .panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r2);
-  padding:16px 18px;position:relative;overflow:hidden;animation:rise .5s cubic-bezier(.2,.9,.3,1) both}
+  padding:16px 18px;position:relative;animation:rise .5s cubic-bezier(.2,.9,.3,1) both}
 .panel::before{content:"";position:absolute;top:0;left:14px;right:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(85,230,193,.5),transparent)}
 .p-head{display:flex;align-items:center;gap:8px;color:var(--mut);font-family:var(--font-ui);font-size:.78rem;
   text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px}
@@ -216,6 +216,16 @@ input[type=range]{accent-color:var(--amber);width:160px}
 .key.go{background:rgba(85,230,193,.15);border-color:rgba(85,230,193,.4);color:var(--ok)}
 @media(max-width:759px){.keypad{grid-template-columns:repeat(3,1fr);max-width:300px;margin:12px auto 0}
  .numin{flex-direction:column;align-items:stretch}.numin .btn{width:100%}}
+@media(min-width:760px){
+ .q-body .numin{flex-direction:row;align-items:stretch;gap:12px}
+ .q-body .numin .num-display{min-height:64px;font-size:1.6rem}
+ .q-body .numin .btn{align-self:flex-end}
+ .keypad{grid-template-columns:repeat(3,54px);gap:6px;margin:0;max-width:none;justify-content:end;flex-shrink:0}
+ .key{min-height:44px;font-size:1rem;border-radius:10px}
+ .key.wide{grid-column:span 2;min-width:0}
+ .q-body{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+ .q-body .numin,.q-body .keypad{flex:1 1 260px}
+}
 /* feedback */
 .fb{margin-top:14px;border-radius:var(--r2);border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));
   padding:16px;opacity:0;transform:translateY(10px);transition:.35s}
@@ -306,6 +316,10 @@ input[type=range]{accent-color:var(--amber);width:160px}
   border:1px solid var(--line);border-radius:12px;overflow:hidden;
   max-height:0;opacity:0;transform:translateY(-6px);transition:max-height .28s cubic-bezier(.2,.9,.3,1),opacity .2s,transform .28s;pointer-events:none;box-shadow:0 14px 40px rgba(0,0,0,.45)}
 .dd.open .dd-list{max-height:240px;opacity:1;transform:none;pointer-events:auto}
+.dd.up .dd-list{top:auto;bottom:calc(100% + 6px);transform:translateY(6px)}
+.dd.up.open .dd-list{transform:none}
+.dd.up .dd-chev{transform:rotate(0)}
+.dd.up.open .dd-chev{transform:rotate(180deg)}
 .dd-opt{display:block;width:100%;text-align:left;background:none;border:0;color:var(--tx);font-size:15px;
   padding:11px 14px;cursor:pointer;transition:background .15s}
 .dd-opt:hover,.dd-opt.hi{background:rgba(85,230,193,.1)}
@@ -333,7 +347,7 @@ input[type=range]{accent-color:var(--amber);width:160px}
 .topo-cv{cursor:grab;touch-action:none;border-radius:14px;background:radial-gradient(ellipse at 50% 40%,rgba(23,38,61,.65),rgba(11,18,32,.92));border:1px solid var(--line)}
 .topo-cv:active{cursor:grabbing}
 .topo-mini{margin:8px 0}
-.p-topo{overflow:hidden}
+.p-topo,.p-factory,.p-heat{overflow:hidden}
 @media(min-width:1024px){.bento .p-topo{grid-column:span 12}}
 /* stats: span desktop (bugfix 12-kolom sempit) */
 @media(min-width:1024px){
@@ -6199,8 +6213,9 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
     var graph = buildGraph(save, opts.focus || null);
     var yaw = 0.7, pitch = -0.42, zoom = opts.focus ? 1.35 : 1.0;
     var vyaw = opts.focus ? 0.0025 : 0.0042;
-    var dragging = false, moved = 0, lastX = 0, lastY = 0;
+    var dragging = false, panning = false, moved = 0, lastX = 0, lastY = 0;
     var hover = null, destroyed = false, raf = null;
+    var panX = 0, panY = 0; // geser pusat pandang (menghapus blind spot orbit)
 
     var focusPt = null;
     if (opts.focus && graph.map[opts.focus]) focusPt = graph.map[opts.focus];
@@ -6214,7 +6229,7 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       var z2 = y * Math.sin(pitch) + zz * Math.cos(pitch);
       var FOC = 420;
       var s = (FOC / (FOC - z2 * 1.35)) * zoom;
-      return { x: (cv.width / 2) + xz * s, y: (cv.height / 2) - yz * s, s: s, z: z2 };
+      return { x: (cv.width / 2) + panX + xz * s, y: (cv.height / 2) + panY - yz * s, s: s, z: z2 };
     }
 
     function draw() {
@@ -6301,12 +6316,18 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       var t = ev.touches ? ev.touches[0] : ev;
       return { x: (t.clientX - r.left) * (cv.width / r.width), y: (t.clientY - r.top) * (cv.height / r.height) };
     }
-    function down(ev) { dragging = true; moved = 0; var p = pos(ev); lastX = p.x; lastY = p.y; }
+    function down(ev) { dragging = true; panning = !!(ev.shiftKey || (ev.button === 2)); moved = 0; var p = pos(ev); lastX = p.x; lastY = p.y; }
     function move(ev) {
       var p = pos(ev);
       if (dragging) {
-        yaw += (p.x - lastX) * 0.008 / dpr;
-        pitch = Math.max(-1.35, Math.min(1.0, pitch + (p.y - lastY) * 0.006 / dpr));
+        if (panning) {
+          panX += (p.x - lastX); panY += (p.y - lastY);
+          panX = Math.max(-cv.width, Math.min(cv.width, panX));
+          panY = Math.max(-cv.height, Math.min(cv.height, panY));
+        } else {
+          yaw += (p.x - lastX) * 0.008 / dpr;
+          pitch = Math.max(-1.35, Math.min(1.0, pitch + (p.y - lastY) * 0.006 / dpr));
+        }
         moved += Math.abs(p.x - lastX) + Math.abs(p.y - lastY);
         lastX = p.x; lastY = p.y;
         if (VF.reduceMotion && VF.reduceMotion()) draw();
@@ -6315,6 +6336,15 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
         cv.style.cursor = hover ? 'pointer' : 'grab';
         if (VF.reduceMotion && VF.reduceMotion()) draw();
       }
+    }
+    function dbl(ev) {
+      var p = pos(ev);
+      var hit = pick(p.x, p.y);
+      if (hit) {
+        focusPt = hit;             // pusatkan ke simpul yang diklik dobel
+        panX = 0; panY = 0;
+      } else { focusPt = null; panX = 0; panY = 0; zoom = opts.focus ? 1.35 : 1.0; }
+      if (VF.reduceMotion && VF.reduceMotion()) draw();
     }
     function up(ev) {
       if (dragging && moved < 6 && hover && opts.clickToOpen) {
@@ -6336,6 +6366,8 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       cv.addEventListener('touchmove', move, { passive: false });
       cv.addEventListener('touchend', up);
       cv.addEventListener('wheel', wheel, { passive: false });
+      cv.addEventListener('dblclick', dbl);
+      cv.addEventListener('contextmenu', function (e) { e.preventDefault(); });
       cv.addEventListener('mouseleave', function () { hover = null; });
     } catch (e) {}
 
@@ -6505,7 +6537,15 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
       open = o;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       host.classList.toggle('open', open);
-      if (open) { hi = -1; }
+      if (open) {
+        hi = -1;
+        // popover flip: kalau ruang di bawah sempit (kartu pendek / dekat dasar layar), buka ke ATAS
+        try {
+          var r = btn.getBoundingClientRect();
+          var spaceBelow = window.innerHeight - r.bottom;
+          host.classList.toggle('up', spaceBelow < 190);
+        } catch (e) {}
+      }
     }
     function choose(v) {
       value = v;
@@ -7034,7 +7074,7 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
         '<div class="panel p-heat"><div class="p-head">' + ic('stats') + '<span>Konsistensi 12 minggu</span></div>' + UI.heatmap(save.stats.dailyLog, 12) + '</div>' +
         '<div class="panel p-factory"><div class="p-head">' + ic('gear') + '<span>Pabrik Otak</span></div><div class="factory-wrap"><canvas class="factory-cv" id="factoryCv"></canvas></div></div>' +
         '<div class="panel p-topo"><div class="p-head">' + ic('map') + '<span>Topologi Pengetahuan 3D</span></div>' +
-        '<p class="muted small">Seluruh ' + E.allNodes().length + ' skill sebagai jaringan 3D — hubungan prasyarat antar materi terlihat utuh. Drag untuk memutar · scroll untuk zoom · klik simpul untuk detail.</p>' +
+        '<p class="muted small">Seluruh ' + E.allNodes().length + ' skill sebagai jaringan 3D — hubungan prasyarat antar materi terlihat utuh. Drag = putar · scroll = zoom · Shift+drag / klik-kanan = geser (pan) · klik = detail · dobel-klik = pusatkan.</p>' +
         '<div id="topoHost"></div></div>' +
       '</div>' +
       (save.stats.lastExportTs && (Date.now() - save.stats.lastExportTs > 14 * 86400000) && STORE.persistent() ?
@@ -7531,19 +7571,19 @@ sup.lx-sup,sub.lx-sub{font-size:.68em}
   UI.route('onboarding', function () {
     var html = '<section class="screen onboarding">' +
       '<div class="ob-hero"><div class="logo-ring big"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAE1ElEQVR42u3bP0sbcRzH8fNwENycO7gWpKWLpXug4JNwtpCxj6JLIdDMPglBcC9mqwg+gT6DLm52aUqISUy8+93v3+s9FWNLevm8v5/v3eX2Do+OnxqgUlqHAAQACAAQACAAQACAAAABAAIABAAIABAAIABAAIAAAAGA7NhP/Q2e3V9OfUx5c3VyfpHqe9tL7YkwgSdElQKsC/7N6fhCZPJmNJtMUxUhugCrgi/0dckQU4RoAiwHX+jJEEOEKAIshl/wsSjC0BK0wo/YLOZg6IsggzWA4CPFNmiFHzW3QSv8qFmCNsZ/CkglL0EFmNsr/OgiQcgWaIUfNUvQhgw/kHqu2iHsBVLNURvKUuFHDquQB2JQNb0KYPojtxbQANAAqZ6hA6Hz1nsDWH8wxBpkBQIIAHSjl+cBYl/9+X356dnP3pz/9On2yPjbr2c/m3x9H+39zJ8b6PrMwH7OH8qq4C+/RoT+g7/8WkwRql2BNoX/Nb+H3cL/mt8jwMDhJ0H48OcuQVt6+EkQPvw5S+AqEKomKwG6TnEtEH6K59YCGgAaACAAQACAAMnS9a6uu8Iv0/Wubm53hTUANEANLWD6h5/iOX4nKMsG2DXMfz58l+od+fL5sfjwZ70CbSvBPPwPd7dSvSXzY7WtBDl/GzTrr0PPJVh1h9fU77cJflwfFBX8IgRY1wbrpv3D3W3z9t1Hqd5i+q8SocRj5yoQqqZIATZNKucC/R9TAqDo9UcDaAHTnwAw/QlgcoEAJl49x6L0IVK8AFoAGkALmP4EACoVwCVR018DADULoAVMfw0A1CyAFuh2jAiA4tcfDaAFQAA4+SWAFgABYPoTQAuAADD9CVBNC4AAJqbpTwCAAE6GrYAEgFWOAFrA9CcATH8CaAEQADlOf+sPAbQACGD6gwBagAAw/QkALUAAmP4EgMAQAK+btGQmgBYgJQG0AAgAJ78EKHcN0gIEgOlPAC0AAsD0J4AWAAFg+hNAC4AASEpSEKCIFtA2BIDpT4AaW8D0JwBAgBrXDZc+CZAF1hQCwPQngJNhEACmPwG0AAgA058AWgAEQFDpQIAiWkB7EAAgQI0t4OSXAAABamwB058AAAFKbAHTnwBV49ImAbSA6U8ALQACIPg5BQiQZHCXW0ArEACmPwFqbAHTnwBAFPYdgmFaYHnKjx9nTdM0zWg2+f/nycGp9YcAZTMP+6bXlkWAFaiIFtgU/mURTH8CFMVoNgn6+yBAMeEnAQEAAtQ8/bUAAQACAAQACAAQIDtuTsdR/z4IABAgxxYw/QlQrQTCT4BqJRD+4fB16EgSrLrDK/jDs3d4dPzUxz90dn85/fchXjisCMloNpk2TdNcnZx3zpoVCM4BAAL0XE9AyPUnOQH62MeAofNmBYIVqG8rrUEIuf70uW1oAGgALYAap3/wBiABUs9REAFcEUIuuWpDv1ktgBRXn0FWIBIg5fAHF8D5AFLPS3ABFu0lAXYNf+jzyUEagARIMfxN0+PzANsyf26gaTw7gHjBH/wcQBsgtfBHaYBVTaANBD9G+KMKsE4EMtQV+ljBT0aATSKQodzQxw5+cgK8JALKIaWvyiQnACEEngDAQHggBgQACAAQACAAQACAAAABAAIABAAIABAAIABAAIAAQKb8BR2tcvwjtnutAAAAAElFTkSuQmCC" alt="Vista Academy" draggable="false"></div>' +
-      '<h1>Vista Forgy <span class="muted small">× Vista Academy</span></h1><p class="tagline">Gym untuk otakmu — logika & matematika industri sampai <b>di luar kepala</b>.</p>' +
+      '<h1>Vista Forgy <span class="muted small">× Vista Academy</span></h1><p class="tagline">Pelatihan repetisi harian: logika & matematika teknik industri.</p>' +
       '<div id="obTopo"></div></div>' +
       '<div class="ob-cards">' +
-      '<div class="ob-card">' + ic('zap') + '<b>Bukan kursus online</b><span>Tiap hari angkat beban: soal drill, bukan video panjang.</span></div>' +
-      '<div class="ob-card">' + ic('gear') + '<b>Soal tidak pernah berulang</b><span>Digenerate oleh mesin — angka, struktur, dan konteksnya selalu baru.</span></div>' +
-      '<div class="ob-card">' + ic('shield') + '<b>Progressmu milikmu</b><span>Semua data di perangkatmu. Bisa dibawa dengan file terenkripsi.</span></div></div>' +
+      '<div class="ob-card">' + ic('zap') + '<b>Format</b><span>Sesi drill ± ' + '25 menit: pemanasan → review terjadwal → materi baru.</span></div>' +
+      '<div class="ob-card">' + ic('gear') + '<b>Bank soal</b><span>Digenerate otomatis — angka, struktur, dan konteks berubah setiap kemunculan.</span></div>' +
+      '<div class="ob-card">' + ic('shield') + '<b>Data</b><span>Tersimpan lokal di perangkat; export/import via file terenkripsi (.fgy).</span></div></div>' +
       '<div class="panel ob-form">' +
       '<label class="field"><span>Nama panggilan (untuk salam & sertifikat)</span><input id="obNama" type="text" maxlength="20" placeholder="mis. Arif"></label>' +
       '<label class="field"><span>Track</span><select id="obTrack"><option value="ti">Teknik Industri (lengkap)</option><option value="both">TI + Universal (non-TI friendly)</option></select></label>' +
       '<label class="field"><span>Target harian</span><select id="obGoal"><option value="15">15 menit (santai)</option><option value="25" selected>25 menit (serius)</option><option value="40">40 menit (gaspol)</option></select></label>' +
       '<div class="btn-row"><button class="btn primary big" id="obGo" style="flex:1">' + ic('play') + ' Mulai Tempa Hari Ini</button>' +
       '<button class="btn ghost" id="obCalib">Kalibrasi (opsional)</button></div>' +
-      '<p class="muted small">Dengan mulai, kamu setuju otakmu akan disesakkan dengan cara yang sehat (desirable difficulty).</p>' +
+      '<p class="muted small">Latihan memakai pengulangan berjarak (spaced repetition) — materi dijadwalkan ulang otomatis sesuai kemampuanmu.</p>' +
       '<div id="calibBox"></div></div></section>';
     UI.$('#app').innerHTML = html;
     var obTopo = UI.$('#obTopo');

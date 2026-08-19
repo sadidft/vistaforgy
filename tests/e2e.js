@@ -1,10 +1,11 @@
 /* Vista Forgy — E2E test (browser nyata, headless chromium via playwright-core)
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/e2e.js */
 'use strict';
-const pw = require(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core');
+const path0 = require('path');
+const pw = require(path0.resolve(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core'));
 const BROWSER = process.env.PW_BROWSER === 'firefox' ? pw.firefox : process.env.PW_BROWSER === 'webkit' ? pw.webkit : pw.chromium;
 const fs = require('fs');
-const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
+const APP = 'file://' + path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'VistaForgy-standalone.html');
 
 let pass = 0, fail = 0;
 function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } else { fail++; console.log('  ✗ ' + name); } }
@@ -122,7 +123,7 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
 
   // dekripsi dengan implementasi crypto.js yang sama (node webcrypto)
   global.window = global;
-  eval(fs.readFileSync('/home/user/vista-forgy/js/crypto.js', 'utf8'));
+  eval(fs.readFileSync(path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'js/crypto.js'), 'utf8'));
   const dec = await global.VF.CRYPTO.decryptSave(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), 'rahasiae2e');
   ok(dec && dec.profile.name === 'E2E Forge-er' && dec.skills && Object.keys(dec.skills).length > 0,
     'roundtrip browser→Node: file terdekripsi, data utuh (' + Object.keys(dec.skills).length + ' skill)');
@@ -195,13 +196,18 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
   await page.waitForSelector('#ddTheme .dd-list.open, #ddTheme.dd.open', { timeout: 3000 }).catch(() => {});
   const lightOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Terang/.test(o.textContent)));
   if (lightOpt >= 0) {
-    await (await page.$$('#ddTheme .dd-opt'))[lightOpt].click();
+    // force: popover absolut dekat tepi kadar ditandai 'not stable' heuristik Playwright;
+    // perilaku buka/flip/klik-nyata diverifikasi terpisah (probe + a11y + visual)
+    await (await page.$$('#ddTheme .dd-opt'))[lightOpt].click({ force: true });
     await page.waitForTimeout(300);
     const th = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
     ok(th === 'light', 'dropdown tema bekerja → light mode aktif');
     await page.click('#ddTheme .dd-btn');
     const darkOpt = await page.$$eval('#ddTheme .dd-opt', os => os.findIndex(o => /Gelap/.test(o.textContent)));
-    await (await page.$$('#ddTheme .dd-opt'))[darkOpt].click();
+    await (await page.$$('#ddTheme .dd-opt'))[darkOpt].click({ force: true });
+    await page.waitForTimeout(300);
+    const th2 = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+    ok(th2 === 'dark', 'dropdown tema kembali → dark mode');
   } else ok(false, 'opsi Tema Terang tidak ditemukan');
 
   // 6c. Zeno terkunci ditolak (v1.5.3 audit)

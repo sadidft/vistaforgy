@@ -4,11 +4,12 @@
    - Screenshot tersimpan di design/ (materi usulan + regresi visual manual)
    Jalankan: cd /home/user/e2e-work && node ../vista-forgy/tests/visual.js */
 'use strict';
-const { chromium } = require('/home/user/e2e-work/node_modules/playwright-core');
+const path0 = require('path');
+const { chromium } = require(path0.resolve(process.env.PW_PATH || '/home/user/e2e-work/node_modules/playwright-core'));
 const fs = require('fs');
-const APP = 'file:///home/user/vista-forgy/VistaForgy-standalone.html';
-const OUT = '/home/user/vista-forgy/design';
-const seedSave = require('/home/user/vista-forgy/tests/visual-seed.js');
+const APP = 'file://' + path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'VistaForgy-standalone.html');
+const OUT = path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'design');
+const seedSave = require(path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'tests/visual-seed.js'));
 fs.mkdirSync(OUT, { recursive: true });
 
 /* save "demo kaya" agar screenshot mewakili kondisi pemakaian nyata */

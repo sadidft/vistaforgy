@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   unit-audit:
@@ -37,21 +38,17 @@ jobs:
           PY
 
   e2e:
-    name: E2E + Recon browser + Visual matrix (Chromium)
+    name: E2E + Recon + Visual + A11Y (Chromium & Firefox)
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.49.1-noble
     env:
-      PW_PATH: /usr/lib/node_modules/playwright-core
+      PW_PATH: ${{ github.workspace }}/tools/node_modules/playwright-core
+      AXE_PATH: ${{ github.workspace }}/tools/node_modules/axe-core/axe.min.js
+      VF_ROOT: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
-      - name: Siapkan playwright-core
-        run: |
-          mkdir -p /usr/lib/node_modules && cd /usr/lib/node_modules
-          npm i --prefix . playwright-core@1.49.1 >/dev/null 2>&1 || npm i -g playwright-core@1.49.1
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
       - name: Build standalone
-        run: node -e "console.log('build di job unit sudah menghasilkan file; job ini checkout ulang — build cepat di sini')" 
-      - name: Build standalone (ulang untuk job ini)
         run: |
           python3 - <<'PY'
           import re, base64
@@ -66,32 +63,37 @@ jobs:
           logo = base64.b64encode(open('assets/vista-192.png', 'rb').read()).decode()
           out = out.replace('assets/vista-192.png', 'data:image/png;base64,' + logo)
           open('VistaForgy-standalone.html', 'w', encoding='utf-8').write(out)
+          print('standalone built')
           PY
-      - name: E2E alur penuh
+      - name: Pasang tools (playwright-core + axe-core) & browser + deps
+        run: |
+          mkdir -p tools
+          npm --prefix tools install playwright-core@1.49.1 axe-core@4.10.2
+          npx --prefix tools playwright-core install chromium firefox --with-deps
+      - name: E2E Chromium (alur penuh + regression)
+        run: node tests/e2e.js
+      - name: E2E Firefox
+        env: { PW_BROWSER: firefox }
         run: node tests/e2e.js
       - name: Bug recon browser (142 node + kalibrasi)
         run: node tests/audit-browser.js
       - name: Visual QA matrix (7 viewport)
         run: node tests/visual.js
-      - name: Audit aksesibilitas (axe-core)
-        env:
-          AXE_PATH: /usr/lib/node_modules/axe-core/axe.min.js
-        run: |
-          npm i --prefix /usr/lib/node_modules axe-core@4.10.2 >/dev/null 2>&1 || npm i -g axe-core@4.10.2
-          node tests/a11y.js
+      - name: Audit aksesibilitas axe-core
+        run: node tests/a11y.js
 
   webkit-experimental:
     name: E2E WebKit (Safari engine) — eksperimental
     runs-on: ubuntu-latest
     continue-on-error: true
-    container:
-      image: mcr.microsoft.com/playwright:v1.49.1-noble
     env:
-      PW_PATH: /usr/lib/node_modules/playwright-core
+      PW_PATH: ${{ github.workspace }}/tools/node_modules/playwright-core
+      VF_ROOT: ${{ github.workspace }}
       PW_BROWSER: webkit
     steps:
       - uses: actions/checkout@v4
-      - run: npm i --prefix /usr/lib/node_modules playwright-core@1.49.1 >/dev/null 2>&1 || npm i -g playwright-core@1.49.1
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
       - name: Build standalone
         run: |
           python3 - <<'PY'
@@ -108,4 +110,9 @@ jobs:
           out = out.replace('assets/vista-192.png', 'data:image/png;base64,' + logo)
           open('VistaForgy-standalone.html', 'w', encoding='utf-8').write(out)
           PY
+      - name: Pasang tools & WebKit
+        run: |
+          mkdir -p tools
+          npm --prefix tools install playwright-core@1.49.1
+          npx --prefix tools playwright-core install webkit --with-deps
       - run: node tests/e2e.js
