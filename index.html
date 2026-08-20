@@ -324,14 +324,30 @@ input[type=range]{accent-color:var(--amber);width:160px}
 .panel .muted.small:first-child{margin-top:2px}
 /* ===== E: landscape pendek — runner 2 kolom, nav menyusut ===== */
 @media(orientation:landscape) and (max-height:520px){
-  .runner{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,42%);gap:14px;align-items:start}
-  .runner .qcard{grid-column:1}
-  .runner .q-body,.runner #feedback{grid-column:2;grid-row:1}
-  .runner .run-actions{grid-column:1/span 2}
-  .runner .run-head{grid-column:1/span 2}
-  .runner .combo{grid-column:1/span 2}
-  html.route-run nav.bottom{position:absolute;transform:translateY(200%);}
-  html.route-run #app{padding-bottom:24px}
+  .runner{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,44%);gap:10px 16px;align-items:start}
+  .runner .run-head,.runner .combo,.runner .run-actions{grid-column:1/-1}
+  .runner .qcard{display:contents}
+  .runner .qcard>*{grid-column:1;min-width:0}
+  .runner .qcard>.q-body{grid-column:2;grid-row:1/span 8;align-self:start;
+    background:var(--panel2);border:1px solid var(--line);border-radius:var(--r2);padding:12px}
+  .runner #feedback{grid-column:1/-1}
+  .runner .q-latex{margin:8px 0}
+  .runner .q-body{max-height:calc(100dvh - 84px);overflow:auto}
+  .runner .key{min-height:34px;font-size:.95rem}
+  .runner .keypad{gap:4px}
+  .runner .num-display{min-height:46px;font-size:1.2rem}
+  .runner .numin{flex-direction:row;align-items:stretch}
+  .runner .numin .btn{min-height:42px}
+  .runner .mc-opt{padding:10px 12px}
+  .runner .mc-detail{font-size:.7rem}
+  .runner .step-in{min-height:38px}
+  .runner .step-row{padding:6px 8px;gap:6px;flex-wrap:wrap}
+  .runner .step-lab{flex:1 1 110px;font-size:.76rem}
+  .runner .step-in{flex:0 1 88px}
+  .runner .step-mark{flex:1 1 auto;font-size:.72rem}
+  .runner .steps{gap:6px}
+  html.route-run nav.bottom{position:absolute;transform:translateY(200%)}
+  html.route-run #app{padding-bottom:16px}
 }
 /* dropdown custom */
 .dd{position:relative;min-width:190px}

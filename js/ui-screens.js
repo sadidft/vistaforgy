@@ -520,21 +520,21 @@
     var usage = STORE.usage();
     var cryptoOk = VF.CRYPTO.available();
     var html = '<section class="screen narrow"><h1>Data</h1>' +
-      '<div class="panel"><h3>Export progress (.fgy terenkripsi)</h3>' +
+      '<div class="panel"><h2 class="ph">Export progress (.fgy terenkripsi)</h2>' +
       '<p class="muted small">File khusus Vista Forgy — AES-256-GCM + PBKDF2 (250.000 iterasi). Password tidak disimpan; lupa password = file tidak bisa dibuka.</p>' +
       (cryptoOk ? '' : '<div class="warn small">' + ic('alert') + ' Web Crypto tidak tersedia di konteks ini — export terenkripsi dinonaktifkan. Gunakan backup plain (dengan risikonya).</div>') +
       '<label class="field"><span>Password file</span><input id="expPw" type="password" autocomplete="new-password" aria-label="Password file export"></label>' +
       '<label class="field"><span>Ulangi password</span><input id="expPw2" type="password" autocomplete="new-password" aria-label="Ulangi password export"></label>' +
       '<button class="btn primary" id="btnExport"' + (cryptoOk ? '' : ' disabled') + '>' + ic('download') + ' Download .fgy</button></div>' +
-      '<div class="panel"><h3>Import progress</h3>' +
+      '<div class="panel"><h2 class="ph">Import progress</h2>' +
       '<label class="field"><span>File .fgy</span><input id="impFile" type="file" accept=".fgy" aria-label="Pilih file .fgy"></label>' +
       '<label class="field"><span>Password file</span><input id="impPw" type="password" autocomplete="off" aria-label="Password file import"></label>' +
       '<div class="btn-row"><button class="btn ghost" id="btnMerge">' + ic('upload') + ' Merge (gabung)</button><button class="btn ghost" id="btnReplace">Replace (timpa)</button></div>' +
       '<div id="impPreview"></div></div>' +
-      '<div class="panel"><h3>Backup plain (tidak terenkripsi)</h3><p class="muted small">JSON mentah — siapa pun yang punya file bisa membacanya.</p>' +
+      '<div class="panel"><h2 class="ph">Backup plain (tidak terenkripsi)</h2><p class="muted small">JSON mentah — siapa pun yang punya file bisa membacanya.</p>' +
       '<div class="btn-row"><button class="btn ghost" id="btnPlainExp">' + ic('download') + ' Download .json</button>' +
       '<label class="btn ghost filelike">' + ic('upload') + ' Import .json<input id="impJson" type="file" accept=".json" hidden></label></div></div>' +
-      '<div class="panel"><h3>Penyimpanan</h3><div class="kv"><span>Terpakai</span><b>' + usage.kb + ' KB / ~' + usage.limitKb + ' KB</b></div>' +
+      '<div class="panel"><h2 class="ph">Penyimpanan</h2><div class="kv"><span>Terpakai</span><b>' + usage.kb + ' KB / ~' + usage.limitKb + ' KB</b></div>' +
       '<div class="kv"><span>Versi schema</span><b>v' + save.version + '</b></div>' +
       '<div class="kv"><span>Migrasi</span><b>' + (save.schemaMigrations || []).join(' → ') + '</b></div>' +
       '<p class="muted small">Data hidup di perangkat ini saja. Export rutin = progress aman 5 tahun.</p></div></section>';
