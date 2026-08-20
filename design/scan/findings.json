@@ -1,0 +1,1754 @@
+[
+ {
+  "state": "home-390-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn active\",\"ax\":49,\"ay\":49}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn\",\"ax\":38,\"ay\":49}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"MULAI HARI INI\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "home-390-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn active\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"SPAN\",\"b\":\"nav-btn active\",\"ax\":17,\"ay\":11}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"SPAN\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":11}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn active\",\"ax\":45,\"ay\":27}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn\",\"ax\":47,\"ay\":27}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"MULAI HARI INI\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "home-360-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn active\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"MULAI HARI INI\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "home-768-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn active\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"MULAI HARI INI\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn primary big\",\"oy\":50,\"txt\":\"MULAI HARI INI\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost\",\"oy\":44,\"txt\":\"Quick 5\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn amber\",\"oy\":44,\"txt\":\"Boss Mingguan!\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "home-1440-dark",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn active\",\"fs\":10.56,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn active\",\"ax\":49,\"ay\":49}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"sharp-num\",\"b\":\"nav-btn\",\"ax\":38,\"ay\":49}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn amber\",\"ratio\":1.42,\"fs\":15,\"txt\":\"Boss Mingguan!\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"shield-row\",\"ratio\":2.15,\"fs\":13,\"txt\":\"streak shield × 1\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"nav-btn active\",\"ratio\":1.42,\"fs\":11,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "home-390-light",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn active\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Tambah Cepatlancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Kurang Cepatlancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Kalilancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Bagilancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Operasi Campurlancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"tier-badge\",\"ratio\":1.13,\"fs\":19,\"txt\":\"0\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":24,\"txt\":\"Pembulatan & Estimas\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":35,\"txt\":\"Persen Dasarlancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"dom-name\",\"fs\":11.2,\"txt\":\"aritmetika\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "map-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":496,\"h\":38,\"txt\":\"Tambah Cepatlancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":496,\"h\":38,\"txt\":\"Kurang Cepatlancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":496,\"h\":38,\"txt\":\"Kalilancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":496,\"h\":38,\"txt\":\"Bagilancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":496,\"h\":38,\"txt\":\"Operasi Campurlancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"tier-badge\",\"ratio\":1.13,\"fs\":19,\"txt\":\"0\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"\",\"oy\":46,\"txt\":\"\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":38,\"txt\":\"Tambah Cepatlancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":38,\"txt\":\"Kurang Cepatlancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"dom-name\",\"fs\":11.2,\"txt\":\"aritmetika\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "map-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"tier-badge\",\"b\":\"nav-btn\",\"ax\":44,\"ay\":37}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H2\",\"b\":\"nav-btn active\",\"ax\":62,\"ay\":29}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H2\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":29}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H2\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":29}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"LP: Pemodelanlancar\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-baru\",\"w\":320,\"h\":38,\"txt\":\"LP: Metode Grafisbaru\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-baru nodelock\",\"w\":320,\"h\":38,\"txt\":\"Dualitas LPbaru\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-baru nodelock\",\"w\":320,\"h\":38,\"txt\":\"Sensitivitas c₁ (LP)baru\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"tier-badge\",\"ratio\":1.13,\"fs\":19,\"txt\":\"0\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"dom-name\",\"fs\":11.2,\"txt\":\"riset-operasi\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "map-390-search",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"baru\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"domname\",\"b\":\"nav-btn\",\"ax\":49,\"ay\":13}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"domname\",\"b\":\"nav-btn\",\"ax\":56,\"ay\":13}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"domname\",\"b\":\"nav-btn\",\"ax\":49,\"ay\":19}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"domname\",\"b\":\"nav-btn\",\"ax\":56,\"ay\":19}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":135,\"h\":36,\"txt\":\"Export CSV\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn active\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "stats-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":11.52,\"txt\":\"Nyala Pertama\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":135,\"h\":36,\"txt\":\"Export CSV\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost small\",\"oy\":36,\"txt\":\"Export CSV\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":64,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":64,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"dikit\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":10.88,\"txt\":\"banyak\"}"
+ },
+ {
+  "state": "stats-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":11.52,\"txt\":\"Nyala Pertama\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H3\",\"b\":\"nav-btn\",\"ax\":49,\"ay\":25}"
+ },
+ {
+  "state": "data-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H3\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":25}"
+ },
+ {
+  "state": "data-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H3\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":25}"
+ },
+ {
+  "state": "data-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"H3\",\"b\":\"nav-btn active\",\"ax\":64,\"ay\":25}"
+ },
+ {
+  "state": "data-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Download .fgy\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "data-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":314,\"ay\":21}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt sel\",\"b\":\"dd-val\",\"ax\":116,\"ay\":19}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"dd-opt sel\",\"ax\":314,\"ay\":33}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":251,\"ay\":7}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle on\",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"w\":316,\"h\":16,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle \",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":194,\"h\":36,\"txt\":\"Tambah profil & pindah\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt\",\"oy\":36,\"txt\":\"Kurangi\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-btn\",\"oy\":20,\"txt\":\"Gelap (default)\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt sel\",\"oy\":40,\"txt\":\"Gelap (default)\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "settings-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":314,\"ay\":21}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt sel\",\"b\":\"dd-val\",\"ax\":116,\"ay\":19}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"dd-opt sel\",\"ax\":314,\"ay\":39}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":251,\"ay\":7}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle on\",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"w\":316,\"h\":16,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle \",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":194,\"h\":36,\"txt\":\"Tambah profil & pindah\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt\",\"oy\":36,\"txt\":\"Kurangi\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-btn\",\"oy\":20,\"txt\":\"Gelap (default)\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt sel\",\"oy\":40,\"txt\":\"Gelap (default)\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "settings-dd-open-down-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":314,\"ay\":21}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt sel\",\"b\":\"dd-val\",\"ax\":116,\"ay\":19}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"dd-opt sel\",\"ax\":314,\"ay\":33}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":251,\"ay\":7}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle on\",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"w\":316,\"h\":16,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle \",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":194,\"h\":36,\"txt\":\"Tambah profil & pindah\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt\",\"oy\":36,\"txt\":\"Kurangi\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-btn\",\"oy\":20,\"txt\":\"Gelap (default)\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "settings-dd-open-up-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":600,\"ay\":21}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt sel\",\"b\":\"dd-val\",\"ax\":116,\"ay\":19}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"dd-opt sel\",\"ax\":600,\"ay\":33}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"dd-opt\",\"b\":\"SPAN\",\"ax\":537,\"ay\":7}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle on\",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"w\":160,\"h\":16,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"toggle \",\"w\":52,\"h\":30,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":194,\"h\":36,\"txt\":\"Tambah profil & pindah\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"\",\"oy\":46,\"txt\":\"\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-btn\",\"oy\":46,\"txt\":\"25 menit\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"dd-opt\",\"oy\":40,\"txt\":\"15 menit\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.56,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.56,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "settings-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.56,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"B\",\"b\":\"nav-btn\",\"ax\":53,\"ay\":21}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"B\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":21}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"B\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":21}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"B\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":21}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"ratio\":1.12,\"fs\":32,\"txt\":\"Vista Forgy × Vista Academ\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"Mulai Tempa Hari Ini\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "onboarding-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"q-prompt\",\"b\":\"nav-btn\",\"ax\":30,\"ay\":38}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"q-prompt\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":38}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"q-prompt\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":38}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"q-prompt\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":38}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"ratio\":1.12,\"fs\":32,\"txt\":\"Vista Forgy × Vista Academ\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary big\",\"ratio\":1.13,\"fs\":17,\"txt\":\"Mulai Tempa Hari Ini\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"Kalibrasi 1/6\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "onboarding-calib-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"nav-btn\",\"fs\":10.88,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Statistik\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"70s\"}"
+ },
+ {
+  "state": "runner-mc-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"logika · Implikasi\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"btn ghost small\",\"b\":\"nav-btn\",\"ax\":68,\"ay\":36}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"btn ghost small\",\"b\":\"nav-btn\",\"ax\":39,\"ay\":36}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"btn ghost small\",\"b\":\"nav-btn\",\"ax\":63,\"ay\":36}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Jawab (Enter)\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost small\",\"oy\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost small\",\"oy\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"40s\"}"
+ },
+ {
+  "state": "runner-numeric-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"kalkulus · Turunan: Aturan Pan\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Jawab (Enter)\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn primary\",\"oy\":44,\"txt\":\"Jawab (Enter)\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"key\",\"oy\":44,\"txt\":\"7\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"key\",\"oy\":44,\"txt\":\"8\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"40s\"}"
+ },
+ {
+  "state": "runner-numeric-1440",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"kalkulus · Turunan: Aturan Pan\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"muted small\",\"b\":\"nav-btn\",\"ax\":49,\"ay\":36}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"muted small\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":36}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"muted small\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":36}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"muted small\",\"b\":\"nav-btn\",\"ax\":64,\"ay\":36}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"step-in\",\"w\":110,\"h\":39,\"txt\":\"\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"step-in\",\"w\":110,\"h\":39,\"txt\":\"\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"step-in\",\"w\":110,\"h\":39,\"txt\":\"\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Periksa Semua Langkah\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn primary\",\"oy\":13,\"txt\":\"Periksa Semua Langka\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"600s\"}"
+ },
+ {
+  "state": "runner-steps-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"aljabar-linear · Eliminasi Gau\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"\",\"w\":157,\"h\":16,\"txt\":\"\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-OUTVIEW",
+  "sev": "high",
+  "detail": "{\"cls\":\"[object SVGAnimatedString]\",\"right\":415,\"left\":79,\"iw\":390}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-OUTVIEW",
+  "sev": "high",
+  "detail": "{\"cls\":\"[object SVGAnimatedString]\",\"right\":411,\"left\":403,\"iw\":390}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-OUTVIEW",
+  "sev": "high",
+  "detail": "{\"cls\":\"[object SVGAnimatedString]\",\"right\":510,\"left\":79,\"iw\":390}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"mc-opt\",\"oy\":30,\"txt\":\"2(8, 2)\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost small\",\"oy\":5,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn ghost small\",\"oy\":5,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"840s\"}"
+ },
+ {
+  "state": "runner-lp-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"riset-operasi · LP: Metode Gra\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"key\",\"b\":\"nav-btn\",\"ax\":41,\"ay\":20}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"key\",\"b\":\"nav-btn\",\"ax\":49,\"ay\":20}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"key\",\"b\":\"nav-btn\",\"ax\":7,\"ay\":20}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"key\",\"b\":\"nav-btn\",\"ax\":74,\"ay\":20}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"mini-btn q-toggle\",\"w\":47,\"h\":22,\"txt\":\"jeda\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Jawab (Enter)\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"key\",\"oy\":29,\"txt\":\"1\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"key\",\"oy\":29,\"txt\":\"2\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"key\",\"oy\":29,\"txt\":\"3\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"478s\"}"
+ },
+ {
+  "state": "runner-queue-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"riset-operasi · Antrean M/M/1\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"btn primary\",\"b\":\"nav-btn\",\"ax\":51,\"ay\":27}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"btn primary\",\"b\":\"nav-btn\",\"ax\":60,\"ay\":27}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":70,\"h\":36,\"txt\":\"lewati\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn ghost small\",\"w\":107,\"h\":36,\"txt\":\"Konsep\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.13,\"fs\":15,\"txt\":\"Jawab (Enter)\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"btn primary\",\"oy\":36,\"txt\":\"Lanjut\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Peta\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"phase-chip\",\"fs\":11.52,\"txt\":\"Fokus\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"\",\"fs\":9.6,\"txt\":\"40s\"}"
+ },
+ {
+  "state": "feedback-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"q-meta\",\"fs\":11.2,\"txt\":\"kalkulus · Turunan: Aturan Pan\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"nav-btn\",\"b\":\"btn primary\",\"ax\":63,\"ay\":34}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"nav-btn\",\"b\":\"why\",\"ax\":63,\"ay\":15}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"nav-btn\",\"b\":\"btn primary\",\"ax\":63,\"ay\":22}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V2-OVERLAP",
+  "sev": "high",
+  "detail": "{\"a\":\"nav-btn active\",\"b\":\"btn primary\",\"ax\":64,\"ay\":34}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Tambah Cepatlancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Kurang Cepatlancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Kalilancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Bagilancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V3-TAP",
+  "sev": "med",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"w\":320,\"h\":38,\"txt\":\"Operasi Campurlancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"tier-badge\",\"ratio\":1.13,\"fs\":19,\"txt\":\"0\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V4-CONTRAST",
+  "sev": "med",
+  "detail": "{\"cls\":\"btn primary\",\"ratio\":1.03,\"fs\":15,\"txt\":\"Latihan (Zeno)\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":24,\"txt\":\"Pembulatan & Estimas\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"node-chip st-lancar\",\"oy\":35,\"txt\":\"Persen Dasarlancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V5-NAVCover",
+  "sev": "high",
+  "detail": "{\"cls\":\"nav-btn\",\"oy\":49,\"txt\":\"Beranda\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"dom-name\",\"fs\":11.2,\"txt\":\"aritmetika\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ },
+ {
+  "state": "concept-modal-390",
+  "code": "V6-FONT",
+  "sev": "low",
+  "detail": "{\"cls\":\"ns\",\"fs\":11.2,\"txt\":\"lancar\"}"
+ }
+]

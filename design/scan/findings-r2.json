@@ -1,0 +1,72 @@
+[
+ {
+  "code": "R1-LANDSCAPE",
+  "sev": "med",
+  "detail": "home 740×360: nav=66px dari 360px (18% layar), konten=behind nav: true"
+ },
+ {
+  "code": "R1-LANDSCAPE",
+  "sev": "med",
+  "detail": "runner 740×360: tinggi kartu=682 dari viewport 360, keypad bottom=735 vs navTop=294, halaman tak-bisa-scroll=false"
+ },
+ {
+  "code": "R2-320",
+  "sev": "med",
+  "detail": "320px: jarak antar tombol nav=0px (lebar 64), judul multi-baris=false, overflowX=false"
+ },
+ {
+  "code": "R3-LIGHT",
+  "sev": "med",
+  "detail": "tier-badge: teks rgb(6, 35, 27) di atas linear-gradient(135deg, rgb(85, 230, 193), rgb(120, 242, 212 — angka gelap di badge gradient tetap, tapi kontras dengan panel terang di sekitar perlu dicek visual"
+ },
+ {
+  "code": "R3-LIGHT-CHART",
+  "sev": "high",
+  "detail": "gridline/axis chart putih-alpha di atas bg terang: rasio gridline=1.01:1, axis=1.02:1, sel heatmap kosong=1.01:1, track progress=1.01:1, garis antre=1.02:1 (nyaris tak terlihat; standar grafik ≥3:1)"
+ },
+ {
+  "code": "R4-TIMER-RING",
+  "sev": "med",
+  "detail": "dasharray SVG=113.1 (r=18) tapi JS pakai CIRC=100.5 → di detik terakhir ring MASIH terisi ~11% (tidak pernah kosong; skala menit detik meleset)"
+ },
+ {
+  "code": "R5-HEATMAP",
+  "sev": "low",
+  "detail": "heatmap 89 sel mulai hari-5 (kolom1) tapi hari ini jatuh di kolom-4 vs weekday asli 4 → kolom TIDAK mewakili hari tetap (pola terlihat miring); grid=316px di panel ~330px → selalu scroll horizontal di mobile"
+ },
+ {
+  "code": "R6-DESKTOP-ALIGN",
+  "sev": "low",
+  "detail": "Setelan/Data container kiri=252px lebar-maks 640 KIRI- aligned; Statistik/Peta kiri=252px lebar penuh → dua sistem lebar berdampingan tak konsisten di desktop (biasanya narrow di-tengah)"
+ },
+ {
+  "code": "R7-TYPOGRAPHY",
+  "sev": "med",
+  "detail": "token font \"Space Grotesk/Inter/JetBrains Mono\" TIDAK pernah dimuat ({\"grotesk\":true,\"inter\":true,\"jetbrains\":true,\"loadedFonts\":[]}) → seluruh app render fallback sistem (Segoe/Roboto/SF) — identitas tipografi brand tidak pernah terealisasi"
+ },
+ {
+  "code": "V0",
+  "sev": "high",
+  "detail": "r2-lpmodel-360 gagal render: page.waitForSelector: Timeout 9000ms exceeded."
+ },
+ {
+  "code": "R9-SUMMARY",
+  "sev": "info",
+  "detail": "summary panel tinggi=135/135/135/135 hero=176 — arsip visual"
+ },
+ {
+  "code": "R10-LONGNAME",
+  "sev": "low",
+  "detail": "nama 26 karakter → judul salam jadi 1 baris (108px), hero mepet dengan panel bawah"
+ },
+ {
+  "code": "V0",
+  "sev": "high",
+  "detail": "r2-calib-done-390 gagal render: page.waitForSelector: Timeout 9000ms exceeded."
+ },
+ {
+  "code": "R11-STATS-ROWS",
+  "sev": "low",
+  "detail": "baris domain tinggi bervariasi 21px (domain panjang seperti \"keandalan-kualitas\" wrap 2 baris) → track bar tidak sejajar antar baris"
+ }
+]

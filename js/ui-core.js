@@ -51,6 +51,7 @@
   UI.nav = function (path) { location.hash = '#/' + path; };
   UI.render = function () {
     var path = (location.hash || '#/home').replace('#/', '').split('?')[0] || 'home';
+    try { document.documentElement.classList.toggle('route-run', path === 'run'); } catch (e) {}
     var fn = routes[path] || routes['home'];
     VF.currentPath = path;
     fn();
@@ -218,7 +219,7 @@
     size = size || 44; stroke = stroke || 4;
     var r = (size - stroke) / 2, c = 2 * Math.PI * r;
     return '<svg class="ring ' + (cls || '') + '" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
-      '<circle cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + r + '" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="' + stroke + '"/>' +
+      '<circle cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + r + '" fill="none" class="c-grid" stroke-width="' + stroke + '"/>' +
       '<circle cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + r + '" fill="none" stroke="currentColor" stroke-width="' + stroke + '" stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + (c * (1 - Math.max(0, Math.min(1, pct)))) + '" transform="rotate(-90 ' + size / 2 + ' ' + size / 2 + ')"/></svg>';
   };
 
@@ -331,8 +332,8 @@
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="linesvg">' +
       '<polygon points="' + poly + '" fill="rgba(126,167,255,0.13)" stroke="#7EA7FF" stroke-width="1.4"/>' + lines +
       '<line id="' + uid + '" x1="' + X(z0 / spec.obj[0]).toFixed(1) + '" y1="' + Y(0).toFixed(1) + '" x2="' + X(0).toFixed(1) + '" y2="' + Y(z0 / spec.obj[1]).toFixed(1) + '" stroke="#55E6C1" stroke-width="2" stroke-linecap="round"/>' +
-      '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' +
-      '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,.25)"/>' + dots + '</svg>' +
+      '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" class="c-axis"/>' +
+      '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" class="c-axis"/>' + dots + '</svg>' +
       '<div class="lp-slider"><span class="muted small">geser garis tujuan:</span>' +
       '<input aria-label="Garis tujuan Z" type="range" min="0" max="' + (spec.zmax * 1.15).toFixed(1) + '" value="' + z0 + '" step="0.5" data-lpuid="' + uid + '" data-obj1="' + spec.obj[0] + '" data-obj2="' + spec.obj[1] + '" data-xmax="' + xmax + '" data-ymax="' + ymax + '" data-w="' + W + '" data-h="' + H + '" data-p="' + P + '">' +
       '<b class="lp-z" data-zfor="' + uid + '">Z = ' + String(z0).replace('.', ',') + '</b></div>';
@@ -445,7 +446,7 @@
     var grid = '';
     for (var g = 0; g <= 4; g++) {
       var gy = P + g * (H - 2 * P) / 4;
-      grid += '<line x1="' + P + '" y1="' + gy + '" x2="' + (W - P) + '" y2="' + gy + '" stroke="rgba(255,255,255,0.06)"/>';
+      grid += '<line x1="' + P + '" y1="' + gy + '" x2="' + (W - P) + '" y2="' + gy + '" class="c-grid"/>';
     }
     var paths = '';
     series.forEach(function (s, i) {
@@ -453,8 +454,8 @@
       paths += '<path d="' + d + '" fill="none" stroke="' + (i ? '#7EA7FF' : '#55E6C1') + '" stroke-width="2.4" stroke-linecap="round"/>';
     });
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="linesvg">' + grid +
-      '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,0.2)"/>' +
-      '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" stroke="rgba(255,255,255,0.2)"/>' + paths + '</svg>';
+      '<line x1="' + P + '" y1="' + (H - P) + '" x2="' + (W - P) + '" y2="' + (H - P) + '" class="c-axis"/>' +
+      '<line x1="' + P + '" y1="' + P + '" x2="' + P + '" y2="' + (H - P) + '" class="c-axis"/>' + paths + '</svg>';
   }
 
   function eoqSvg(spec) {

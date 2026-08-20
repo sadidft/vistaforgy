@@ -2,6 +2,19 @@
 
 Format subversi mengikuti aturan pemilik produk: `1.x.y` — tidak pernah naik ke v2; setelah 1.9 langsung 1.10 (hingga 1.999). Update kecil = subversi, bukan lompatan minor.
 
+## v1.7.0 — VISUAL REPAIR TOTAL (19 temuan QA → fix + verify angka)
+- **VF-08/01**: light theme diberi token sendiri (`--amber/--cyan` gelap, `--chart-grid/axis/track`) — kontras nav aktif 1,42→**4,76:1**, axis chart 1,02→**17:1**, heatmap lvl via color-mix; muted light dinaikkan.
+- **VF-09**: heatmap fluid (`grid-auto-columns:1fr` + aspect-ratio) — mengisi **100%** lebar panel (dulu 52%).
+- **VF-10**: timer ring membaca atribut r (sinkron dasharray 113,1) — ring kini benar-benar kosong di waktu habis.
+- **VF-11**: font brand DIBUNDEL (Space Grotesk/Inter/JetBrains Mono variable woff2 lokal, 108KB; standalone inline) — `document.fonts` 0→3.
+- **VF-12**: opsi LP-model direstrukturisasi (label "Model A/B/C" + blok detail mono) — bukan lagi dinding teks.
+- **VF-17**: steps-row flex-wrap (input+mark baris penuh) — baris tertinggi 214→119px di 360px.
+- **VF-02/03**: tap target ≥44px (small-btn, node-chip, toggle hit-area, step-in, mini-btn); font floor 12px (nav, legend, meta, chip, phase).
+- **VF-04/14/15/16**: scroll-padding-bottom, nav 320px lega, nama clamp 2 baris, layar narrow di-center di desktop.
+- **VF-13**: landscape pendek — runner 2 kolom + nav menyusut saat route-run.
+- **VF-19/20/05/06**: toasts aria-live, modal safe-area, forced-colors fallback h1, sr-only h1 runner/summary.
+- QA ulang penuh: engine 13.992 · audit statis BERSIH · audit-browser · E2E 33/33 · a11y 6/6 · visual 32/32 · verifikasi angka per-temuan (lihat laporan QA ronde 1–3).
+
 ## v1.6.5 — Multi-profil satu device
 - Panel "Profil" di Setelan: buat/pindah/hapus profil; progress tiap profil terpisah penuh di slot lokal sendiri (`vf.p:<nama>`); profil aktif tetap di `vf.save` (kompatibel penuh dengan export `.fgy`).
 - FIX race tulis saat pindah profil (`VF.persist()` setelah `switchProfile` sempat menimpa slot baru dengan save in-memory basi — tertangkap E2E baru lalu diperbaiki).

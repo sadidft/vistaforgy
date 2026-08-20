@@ -121,7 +121,7 @@
 
     var phaseLabel = { warmup: 'Warm-up', review: 'Review', focus: 'Fokus', exam: sess.mode === 'boss' ? 'Boss Mingguan' : sess.mode === 'sim' ? 'Exam Sim' : 'Ujian Promosi Tier ' + sess.tier }[item.kind === 'exam' ? 'exam' : item.kind] || 'Latihan';
     var node = E.getNode(item.skillId);
-    var html = '<section class="screen runner">' +
+    var html = '<section class="screen runner"><h1 class="sr-only">Sesi latihan — ' + phaseLabel + '</h1>' +
       '<div class="run-head"><span class="phase-chip">' + phaseLabel + '</span>' +
       '<div class="run-prog"><div class="run-prog-fill" style="width:' + Math.round(sess.idx / sess.items.length * 100) + '%"></div></div>' +
       '<span class="run-count">' + (sess.idx + 1) + '/' + sess.items.length + '</span>' +
@@ -198,8 +198,9 @@
     for (var i = idxs.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idxs[i]; idxs[i] = idxs[j]; idxs[j] = t; }
     wrap.innerHTML = '<p class="muted small mc-hint">Tips: tekan 1–' + idxs.length + ' di keyboard.</p><div class="mc">' + idxs.map(function (ci, pos) {
       var c = q.choices[ci];
+      var detail = c.detail ? '<span class="mc-detail">' + esc(c.detail) + '</span>' : '';
       return '<button class="mc-opt" data-ci="' + ci + '"><span class="mc-key">' + (pos + 1) + '</span>' +
-        (c.latex ? '<span class="mc-lab">' + UI.latex(c.latex) + '</span>' : '<span class="mc-lab">' + esc(c.label) + '</span>') + '</button>';
+        '<span class="mc-main"><span class="mc-lab">' + (c.latex ? UI.latex(c.latex) : esc(c.label)) + '</span>' + detail + '</span></button>';
     }).join('') + '</div>';
     UI.$$('.mc-opt', wrap).forEach(function (b) {
       b.onclick = function () {
@@ -265,7 +266,7 @@
     if (raf) cancelAnimationFrame(raf);
     var ringEl = UI.$('#runTimer .ring circle:last-child');
     var txt = UI.$('#timerTxt');
-    var CIRC = 2 * Math.PI * 16; // r=16 utk ring size 40 stroke 4 (persis UI.ring)
+    var CIRC = ringEl ? 2 * Math.PI * (parseFloat(ringEl.getAttribute('r')) || 18) : 113.1; // dari atribut r asli
     function frame() {
       if (!R.sess || cur.answered) return;
       var left = cur.limit - (performance.now() - cur.t0);
@@ -285,7 +286,7 @@
         if (!R.sess || cur.answered) { clearInterval(iv); return; }
         var left = cur.limit - (performance.now() - cur.t0);
         var ringEl2 = UI.$('#runTimer .ring circle:last-child');
-        if (ringEl2) ringEl2.style.strokeDashoffset = String(2 * Math.PI * 16 * (1 - Math.max(0, left / cur.limit)));
+        if (ringEl2) ringEl2.style.strokeDashoffset = String(2 * Math.PI * (parseFloat(ringEl2.getAttribute('r')) || 18) * (1 - Math.max(0, left / cur.limit)));
         if (UI.$('#timerTxt')) {
           UI.$('#timerTxt').textContent = Math.max(0, Math.ceil(left / 1000)) + 's';
           UI.$('#timerTxt').classList.toggle('urgent', left < 5000);
@@ -408,7 +409,8 @@
     };
     function answerLabel(qq) {
       var c = qq.choices.filter(function (x) { return x.correct; })[0];
-      return c ? (c.label || c.latex) : '–';
+      if (!c) return '–';
+      return c.detail ? c.label + ' — ' + c.detail : (c.label || c.latex);
     }
     function fmtAns(qq) { return String(qq.answer && qq.answer.value !== undefined ? qq.answer.value : '–').replace('.', ','); }
     function escForLatex(s) { return String(s).replace(/[^\\{}]/g, function (ch) { return ch; }); }

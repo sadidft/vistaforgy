@@ -1,10 +1,10 @@
 /* Vista Forgy — service worker sederhana: cache-first, offline penuh */
-var CACHE = 'vista-forgy-v1-6-6';
+var CACHE = 'vista-forgy-v1-7-0';
 var ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png',
   './js/rng.js', './js/engine.js', './js/generators-core.js', './js/generators-mid.js',
   './js/generators-adv.js', './js/generators-t3.js', './js/generators-t4.js', './js/tables.js', './js/content.js', './js/scheduler.js', './js/progression.js',
-  './js/storage.js', './js/crypto.js', './js/audio.js', './js/koa.js', './js/topo3d.js', './assets/vista-192.png', './assets/vista-512.png',
+  './js/storage.js', './js/crypto.js', './js/audio.js', './js/koa.js', './js/topo3d.js', './assets/vista-192.png', './assets/vista-512.png', './assets/fonts/sg-var.woff2', './assets/fonts/inter-var.woff2', './assets/fonts/jbm-var.woff2',
   './js/ui-core.js', './js/ui-screens.js', './js/ui-runner.js', './js/app.js'
 ];
 self.addEventListener('install', function (e) {

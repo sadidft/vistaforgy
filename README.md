@@ -1,7 +1,8 @@
-# 🔩 Vista Forgy — Gym Otak (v1.6.5)
+# 🔩 Vista Forgy — Gym Otak (v1.7.0 — Visual Repair Total)
 
 > **Gym untuk otakmu — logika & matematika industri sampai di luar kepala.**
 >
+> 🆕 **v1.7.0 — VISUAL REPAIR TOTAL**: 19 temuan QA visual (3 ronde scanning) diperbaiki & diverifikasi angka — light theme + chart pulih (4,76:1 & 17:1), heatmap fluid 100%, font brand dibundel (108KB), tap ≥44px, font floor 12px, timer ring akurat, LP-model berstruktur, landscape 2-kolom, a11y tambahan.
 > 🆕 **v1.6.5 — Multi-profil satu device** & **v1.6.4 — QA total**: axe-core 6/6 (nol serious/critical), Lighthouse 93/100/100/100, CI lengkap + job WebKit, panel Profil (slot terpisah, kompatibel .fgy), E2E 2 engine 29/29.
 > 🆕 **v1.6.3 — Bug recon permanen + non-UI/UX**: FIX soal kalibrasi tanpa visual (kini jalur kalibrasi merender visual+LaTeX+animasi), FIX `inv.discount` gagal-generate, **suite recon ganda**: `tests/audit.js` (statis 8.520 soal) + `tests/audit-browser.js` (render semua 142 node di browser nyata, 160/160) — kelas bug "soal butuh visual tapi tak tampil" kini MUSTAHIL lolos senyap. Plus: CHANGELOG.md lengkap, CI GitHub Actions, **E2E lintas-browser: Chromium 25/25 & Firefox 25/25**.
 > 🆕 **v1.6 — Front-end sweep**: FIX kalibrasi macet di soal 1/6 (node numeric kini diganti node MC + guard anti-macet), FIX gap panel Setelan/Data (dulu nempel 0px → 14px), jarak onboarding dirapikan, modal punya tombol ✕, transisi halaman halus, legend heatmap, focus-ring mint konsisten, scrollbar gelap, haptic keypad, runner header tahan layar 320px, toggle-row responsif, pesan "tidak ketemu" di pencarian Peta. QA: E2E 25/25 (5 regression test baru) + Visual 32/32.

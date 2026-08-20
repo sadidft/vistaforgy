@@ -1,0 +1,72 @@
+[
+ {
+  "code": "FZ-PROMPT",
+  "sev": "info",
+  "detail": "prompt terpanjang: 297 kar (rso.goal) :: Target produksi pabrik batik di Pekalongan: 120 lembar. Kelebihan prod"
+ },
+ {
+  "code": "FZ-CHOICE",
+  "sev": "info",
+  "detail": "opsi MC terpanjang: 99 kar (uni.korelasi) :: Korelasi positif, tapi pemadam bukan penyebab kerugian — besarnya keba"
+ },
+ {
+  "code": "FZ-STEPLAB",
+  "sev": "info",
+  "detail": "label langkah terpanjang: 57 kar (rso.simpleks) :: elemen PIVOT (perpotongan baris leaving × kolom entering)"
+ },
+ {
+  "code": "FZ-LATEX",
+  "sev": "info",
+  "detail": "latex terpanjang: 121 kar (lin.invers2); jumlah langkah max: 5 (lin.gauss3)"
+ },
+ {
+  "code": "R3-GHOSTHOVER",
+  "sev": "med",
+  "detail": "3 aturan :hover ber-transform TANPA @media(hover:hover) → ghost-hover menempel di Android setelah tap :: .btn.primary:hover, .node-chip:hover, .mc-opt:hover"
+ },
+ {
+  "code": "R3-MODAL-SAFEAREA",
+  "sev": "low",
+  "detail": "bottom-sheet modal tidak punya padding safe-area-inset-bottom (iPhone home indicator)"
+ },
+ {
+  "code": "R3-LIGHT-RUNNER",
+  "sev": "med",
+  "detail": "light runner: phase-chip mint kontras vs bg terang = 1.42:1; panel feedback tinggi 431px"
+ },
+ {
+  "code": "R3-MODAL-X",
+  "sev": "low",
+  "detail": "modal tinggi: ✕ ikut ter-scroll (delta 0px, sticky=true) — tombol tutup hilang dari pandangan saat membaca bawah"
+ },
+ {
+  "code": "R3-EXAM-CHIP",
+  "sev": "low",
+  "detail": "header runner exam di 360px: tinggi 40px (wrap=false), chip 87px"
+ },
+ {
+  "code": "R3-STEPS-360",
+  "sev": "med",
+  "detail": "baris langkah di 360px: 214px/1baris, 107px/1baris, 107px/1baris — label panjang bikin baris membengkak"
+ },
+ {
+  "code": "R3-GHOSTHOVER-TEST",
+  "sev": "low",
+  "detail": "setelah tap (emulasi touch), .mc-opt transform=none → bersih"
+ },
+ {
+  "code": "R3-TOAST-A11Y",
+  "sev": "low",
+  "detail": "#toasts aria-live = TIDAK ADA — screen reader tidak mengumumkan notifikasi"
+ },
+ {
+  "code": "R3-LIGHT-STATS",
+  "sev": "med",
+  "detail": "light: sparkline stroke=#55E6C1 (mint di panel terang ≈1,7:1), sel lvl4=rgb(85, 230, 193) — satu keluarga dengan VF-08"
+ },
+ {
+  "code": "R3-EXAM-RESULT",
+  "sev": "info",
+  "detail": "layar hasil Exam Sim ter-arsip"
+ }
+]

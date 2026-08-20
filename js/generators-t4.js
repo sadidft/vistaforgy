@@ -57,15 +57,16 @@
         c.map(function (k, i) { return k.a + 'x₁ + ' + k.b + 'x₂ ≤ ' + k.r; }).join('; ') + '; x₁, x₂ ≥ 0';
       var w1 = 'Min Z = ' + o[0] + 'x₁ + ' + o[1] + 'x₂; ' + c.map(function (k) { return k.a + 'x₁ + ' + k.b + 'x₂ ≤ ' + k.r; }).join('; ') + '; x₁, x₂ ≥ 0';
       var w2 = 'Maks Z = ' + o[0] + 'x₁ + ' + o[1] + 'x₂; ' + c.map(function (k) { return k.a + 'x₁ + ' + k.b + 'x₂ ≥ ' + k.r; }).join('; ') + '; x₁, x₂ ≥ 0';
+      var letters = ['A', 'B', 'C'];
       return {
         format: 'mc',
         promptText: ctx.place + ' membuat 2 produk: ' + ctx.items[0] + ' (x₁, labar Rp' + o[0] + 'rb/unit) dan ' + ctx.items[1] + ' (x₂, laba Rp' + o[1] + 'rb/unit). Konsumsi sumber daya per unit dan ketersediaannya: ' +
           c.map(function (k) { return '(' + k.a + ', ' + k.b + ') batas ' + k.r; }).join('; ') + '. Manakah model program linear (linear programming) yang TEPAT?',
         promptLatex: '\\max Z=' + o[0] + 'x_1+' + o[1] + 'x_2',
         choices: [
-          { label: correct, correct: true },
-          { label: w1, correct: false, tag: 'fungsi tujuan memakai MIN — ini masalah maksimasi laba' },
-          { label: w2, correct: false, tag: 'arah kendala terbalik: ketersediaan sumber daya = ≤' }
+          { label: 'Model A', detail: correct, correct: true },
+          { label: 'Model B', detail: w1, correct: false, tag: 'fungsi tujuan memakai MIN — ini masalah maksimasi laba' },
+          { label: 'Model C', detail: w2, correct: false, tag: 'arah kendala terbalik: ketersediaan sumber daya = ≤' }
         ],
         solution: steps('Pemodelan LP', [
           st('1) Variabel keputusan: x₁ = jumlah ' + ctx.items[0] + ', x₂ = jumlah ' + ctx.items[1] + '.'),
