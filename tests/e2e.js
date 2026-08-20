@@ -6,6 +6,7 @@ const pw = require(path0.resolve(process.env.PW_PATH || '/home/user/e2e-work/nod
 const BROWSER = process.env.PW_BROWSER === 'firefox' ? pw.firefox : process.env.PW_BROWSER === 'webkit' ? pw.webkit : pw.chromium;
 const fs = require('fs');
 const APP = 'file://' + path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'VistaForgy-standalone.html');
+const seedSave = require(path0.resolve(process.env.VF_ROOT || '/home/user/vista-forgy', 'tests/visual-seed.js'));
 
 let pass = 0, fail = 0;
 function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } else { fail++; console.log('  ✗ ' + name); } }
@@ -213,6 +214,37 @@ function ok(cond, name) { if (cond) { pass++; console.log('  ✓ ' + name); } el
     const th2 = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
     ok(th2 === 'dark', 'dropdown tema kembali → dark mode');
   } else ok(false, 'opsi Tema Terang tidak ditemukan');
+
+  // 6b2. REGRESSION (bug nyata pemakai): dropdown TIDAK boleh ketutup/kepotong panel di bawahnya
+  {
+    const p3 = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    p3.on('pageerror', e3 => errors.push('dd-stack: ' + e3.message));
+    await p3.addInitScript(s => { try { localStorage.setItem('vf.save', s); } catch (err) {} }, JSON.stringify(seedSave()));
+    await p3.goto(APP + '#/settings');
+    await p3.waitForSelector('#ddMotion .dd-btn', { timeout: 6000 });
+    await p3.click('#ddMotion .dd-btn');
+    await p3.waitForTimeout(450); // tunggu animasi panel selesai & stacking context lepas
+    const cov = await p3.evaluate(() => {
+      const opts = document.querySelectorAll('#ddMotion .dd-opt');
+      if (!opts.length) return { err: 'opsi tidak ada' };
+      const r = opts[0].getBoundingClientRect();
+      const cx = r.x + r.width / 2, cy = r.y + r.height / 2;
+      const top = document.elementFromPoint(cx, cy);
+      return {
+        covered: !(top === opts[0] || opts[0].contains(top)),
+        inViewport: r.top >= 0 && r.bottom <= window.innerHeight,
+        y: Math.round(r.y), hit: top ? (top.className || top.tagName).toString().slice(0, 30) : 'null'
+      };
+    });
+    ok(!cov.err && cov.covered === false, 'dropdown tidak tertutup panel (elementFromPoint → ' + (cov.hit || cov.err) + ')');
+    ok(!cov.err && cov.inViewport === true, 'opsi dropdown seluruhnya dalam viewport (y=' + (cov.y !== undefined ? cov.y : '?') + '/800)');
+    // klik NYATA (bukan force/eval) — bukti actionability sehat
+    const clicked = await p3.$$('#ddMotion .dd-opt');
+    if (clicked.length) {
+      await clicked[0].click({ timeout: 6000 }).then(() => ok(true, 'klik nyata opsi dropdown berhasil (tanpa force)')).catch(() => ok(false, 'klik nyata opsi dropdown gagal'));
+    }
+    await p3.close();
+  }
 
   // 6c. Zeno terkunci ditolak (v1.5.3 audit)
   await page.goto(APP + '#/run?mode=zeno&node=rso.simpleks2');
